@@ -270,7 +270,16 @@ export const StaffManagementPage: React.FC = () => {
               type="text"
               required
               value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              onChange={(e) => {
+                const val = e.target.value;
+                const firstName = val.trim().split(' ')[0].toLowerCase().replace(/[^a-z0-9]/g, '');
+                const autoEmail = firstName ? `${firstName}@brightloop.com` : '';
+                setFormData({
+                  ...formData,
+                  name: val,
+                  email: (!formData.email || formData.email.endsWith('@brightloop.com')) ? autoEmail : formData.email
+                });
+              }}
               placeholder="e.g. Priya Sharma"
               className="w-full px-3.5 py-2 rounded-xl border border-[#E6DDEC] bg-white focus:outline-none focus:border-[#673B70]"
             />
@@ -287,6 +296,9 @@ export const StaffManagementPage: React.FC = () => {
                 placeholder="priya@brightloop.com"
                 className="w-full px-3.5 py-2 rounded-xl border border-[#E6DDEC] bg-white focus:outline-none focus:border-[#673B70]"
               />
+              <p className="text-[10px] text-[#81758A] mt-1">
+                Format: <span className="font-semibold text-[#673B70]">[name]@brightloop.com</span> | Password: <span className="font-semibold text-[#673B70]">[Name]@123</span>
+              </p>
             </div>
             <div>
               <label className="block font-bold text-[#34243A] uppercase mb-1">Phone Number</label>

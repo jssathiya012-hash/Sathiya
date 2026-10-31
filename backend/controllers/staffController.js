@@ -34,19 +34,24 @@ export async function createStaff(req, res) {
       return res.status(400).json({ success: false, message: 'Name, email, designation, and department are required.' });
     }
 
-    const existingUser = await DB.User().findOne({ email: email.toLowerCase().trim() });
+    const firstName = name.trim().split(' ')[0].toLowerCase().replace(/[^a-z0-9]/g, '');
+    const defaultEmail = `${firstName}@brightloop.com`;
+    const targetEmail = (email || defaultEmail).toLowerCase().trim();
+
+    const existingUser = await DB.User().findOne({ email: targetEmail });
     if (existingUser) {
       return res.status(400).json({ success: false, message: 'A user with this email already exists.' });
     }
 
     const count = await DB.Staff().countDocuments();
     const staffId = `STF-${String(count + 101).padStart(3, '0')}`;
-    const tempPassword = 'Staff@' + Math.floor(1000 + Math.random() * 9000);
+    const capName = firstName.charAt(0).toUpperCase() + firstName.slice(1);
+    const tempPassword = `${capName}@123`;
     const hashedPassword = await bcrypt.hash(tempPassword, 10);
 
     const user = await DB.User().create({
       name,
-      email: email.toLowerCase().trim(),
+      email: targetEmail,
       phone: phone || '',
       password: hashedPassword,
       role: 'STAFF',
@@ -146,7 +151,9 @@ export async function resetStaffPassword(req, res) {
     const staff = await DB.Staff().findById(id);
     if (!staff) return res.status(404).json({ success: false, message: 'Staff member not found.' });
 
-    const newTempPassword = 'Staff@' + Math.floor(1000 + Math.random() * 9000);
+    const firstName = (staff.name || 'Staff').trim().split(' ')[0].toLowerCase().replace(/[^a-z0-9]/g, '');
+    const capName = firstName.charAt(0).toUpperCase() + firstName.slice(1);
+    const newTempPassword = `${capName}@123`;
     const hashedPassword = await bcrypt.hash(newTempPassword, 10);
 
     if (staff.userId) {

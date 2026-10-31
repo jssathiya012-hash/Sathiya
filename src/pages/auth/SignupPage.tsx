@@ -27,7 +27,7 @@ export const SignupPage: React.FC = () => {
     }
 
     if (password.length < 8 || !/[A-Z]/.test(password)) {
-      setErrorMessage('Password must be at least 8 characters long and contain at least one uppercase letter (A-Z).');
+      setErrorMessage('Password must be at least 8 characters long and contain at least one uppercase capital letter (e.g. Sathiya@012).');
       return;
     }
 
@@ -166,10 +166,13 @@ export const SignupPage: React.FC = () => {
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Min 6 characters"
+                    placeholder="e.g. Sathiya@012"
                     className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#E6DDEC] bg-white text-sm text-[#34243A] focus:outline-none focus:border-[#673B70] focus:ring-2 focus:ring-[#673B70]/20 transition-all"
                   />
                 </div>
+                <p className="text-[10px] text-[#81758A] mt-1">
+                  At least 8 characters with 1 capital letter (e.g. Sathiya@012)
+                </p>
               </div>
 
               <div>

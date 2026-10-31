@@ -23,11 +23,11 @@ export async function seedData() {
     console.log(' Created Super Admin: jssathiya012@gmail.com / Sargiyt6tay');
   }
 
-  // 2. Staff Account
-  const staffEmail = 'staff@brightloop.com';
+  // 2. Staff Accounts (Rahul Sharma: rahul@brightloop.com / Rahul@123, Staff: staff@brightloop.com / Staff@123)
+  const staffEmail = 'rahul@brightloop.com';
   let staffUser = await DB.User().findOne({ email: staffEmail });
   if (!staffUser) {
-    const staffPass = await bcrypt.hash('Staff@12345', 10);
+    const staffPass = await bcrypt.hash('Rahul@123', 10);
     staffUser = await DB.User().create({
       name: 'Rahul Sharma',
       email: staffEmail,
@@ -57,14 +57,50 @@ export async function seedData() {
       tempPassword: '',
       mustChangePassword: false
     });
-    console.log(' Created Staff: staff@brightloop.com / Staff@12345');
+    console.log(' Created Staff: rahul@brightloop.com / Rahul@123');
+  }
+
+  const staffEmail2 = 'staff@brightloop.com';
+  let staffUser2 = await DB.User().findOne({ email: staffEmail2 });
+  if (!staffUser2) {
+    const staffPass2 = await bcrypt.hash('Staff@123', 10);
+    staffUser2 = await DB.User().create({
+      name: 'Staff Member',
+      email: staffEmail2,
+      password: staffPass2,
+      role: 'STAFF',
+      phone: '+91 98765 00003',
+      isActive: true
+    });
+
+    await DB.Staff().create({
+      userId: staffUser2._id || staffUser2.id,
+      staffId: 'STF-102',
+      name: 'Staff Member',
+      email: staffEmail2,
+      phone: '+91 98765 00003',
+      designation: 'Customer Success Specialist',
+      department: 'Customer Success',
+      status: 'Active',
+      permissions: {
+        canViewCustomers: true,
+        canEditCustomers: true,
+        canViewSubscriptions: true,
+        canRenewSubscriptions: true,
+        canViewPayments: true,
+        canViewInvoices: true
+      },
+      tempPassword: '',
+      mustChangePassword: false
+    });
+    console.log(' Created Staff: staff@brightloop.com / Staff@123');
   }
 
   // 3. Demo Customer 1
   const custEmail = 'demo@brightloop.com';
   let custUser = await DB.User().findOne({ email: custEmail });
   if (!custUser) {
-    const custPass = await bcrypt.hash('Demo@12345', 10);
+    const custPass = await bcrypt.hash('Sathiya@012', 10);
     custUser = await DB.User().create({
       name: 'Aditi Rao',
       email: custEmail,
@@ -92,14 +128,14 @@ export async function seedData() {
       status: 'Active',
       assignedStaffId: 'STF-101'
     });
-    console.log(' Created Customer 1: demo@brightloop.com / Demo@12345');
+    console.log(' Created Customer 1: demo@brightloop.com / Sathiya@012');
   }
 
   // Demo Customer 2 (Sathiya)
   const cust2Email = 'sathiya@brightloop.com';
   let cust2User = await DB.User().findOne({ email: cust2Email });
   if (!cust2User) {
-    const cust2Pass = await bcrypt.hash('Sathiya@12345', 10);
+    const cust2Pass = await bcrypt.hash('Sathiya@012', 10);
     cust2User = await DB.User().create({
       name: 'Sathiya JS',
       email: cust2Email,
