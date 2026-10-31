@@ -18,7 +18,7 @@ interface AuthState {
   isAuthenticated: boolean;
   isLoading: boolean;
   error: string | null;
-  login: (email: string, password: string, rememberMe?: boolean) => Promise<User>;
+  login: (email: string, password: string, rememberMe?: boolean, expectedRole?: 'ADMIN' | 'STAFF' | 'CUSTOMER') => Promise<User>;
   register: (data: { name: string; email: string; password: string; phone?: string; companyName?: string }) => Promise<User>;
   logout: () => void;
   checkAuth: () => Promise<void>;
@@ -32,10 +32,10 @@ export const useAuthStore = create<AuthState>((set) => ({
   isLoading: false,
   error: null,
 
-  login: async (email, password, rememberMe = true) => {
+  login: async (email, password, rememberMe = true, expectedRole) => {
     set({ isLoading: true, error: null });
     try {
-      const res = await api.post('/auth/login', { email, password, rememberMe });
+      const res = await api.post('/auth/login', { email, password, rememberMe, expectedRole });
       const { user, token } = res.data;
 
       localStorage.setItem('smartsub_token', token);

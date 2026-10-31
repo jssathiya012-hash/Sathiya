@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useSearchParams, Link } from 'react-router-dom';
-import { Lock, Mail, Eye, EyeOff, ArrowRight, ShieldCheck, UserCheck, Users, Sparkles, Check } from 'lucide-react';
+import { Lock, Mail, Eye, EyeOff, ArrowRight, ShieldCheck, UserCheck, Users, AlertCircle, Info } from 'lucide-react';
 import { useAuthStore } from '../../store/authStore';
 import { BrandLogo } from '../../components/BrandLogo';
 
@@ -10,6 +10,7 @@ export const LoginPage: React.FC = () => {
   const redirectParam = searchParams.get('redirect');
   const { login, isLoading } = useAuthStore();
 
+  const [selectedRole, setSelectedRole] = useState<'ADMIN' | 'STAFF' | 'CUSTOMER'>('CUSTOMER');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -28,22 +29,34 @@ export const LoginPage: React.FC = () => {
     }
   };
 
+  const handleRoleChange = (role: 'ADMIN' | 'STAFF' | 'CUSTOMER') => {
+    setSelectedRole(role);
+    setEmail('');
+    setPassword('');
+    setErrorMessage('');
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage('');
+
+    if (!email.trim()) {
+      setErrorMessage('Please enter your email address.');
+      return;
+    }
+
+    // Password validation rule: minimum 8 characters and at least one uppercase letter (A-Z)
+    if (password.length < 8 || !/[A-Z]/.test(password)) {
+      setErrorMessage('Password must be at least 8 characters long and contain at least one uppercase capital letter (A-Z).');
+      return;
+    }
+
     try {
-      const loggedInUser = await login(email, password, rememberMe);
+      const loggedInUser = await login(email, password, rememberMe, selectedRole);
       handleLoginSuccess(loggedInUser);
     } catch (err: any) {
-      setErrorMessage(err.message || 'Invalid email or password. Please check credentials.');
+      setErrorMessage(err.message || 'Invalid email or password. Please check your credentials.');
     }
-  };
-
-  // Only auto-populates credentials in the form fields — does NOT log in automatically
-  const handleFillCredentials = (fillEmail: string, fillPass: string) => {
-    setEmail(fillEmail);
-    setPassword(fillPass);
-    setErrorMessage('');
   };
 
   return (
@@ -65,77 +78,94 @@ export const LoginPage: React.FC = () => {
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md z-10 px-4">
-        {/* Quick Demo Fill Selector */}
-        <div className="bg-[#E9DDF2]/70 border border-[#D8C2E5] rounded-2xl p-3 mb-6 shadow-xs">
-          <div className="flex items-center justify-between mb-2 px-1">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-[#4B2455] flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-[#673B70]" /> Quick Fill Demo Credentials
+        {/* Step 1: Select Account Portal Type */}
+        <div className="bg-[#E9DDF2]/70 border border-[#D8C2E5] rounded-2xl p-1.5 mb-5 shadow-xs">
+          <div className="text-[10px] uppercase font-bold text-[#81758A] px-2 py-1 flex items-center justify-between">
+            <span>Step 1: Select Account Portal</span>
+            <span className="font-semibold text-[#673B70]">
+              {selectedRole === 'ADMIN' ? 'Admin Mode' : selectedRole === 'STAFF' ? 'Staff Mode' : 'Customer Mode'}
             </span>
-            <span className="text-[10px] text-[#81758A]">Fills input fields</span>
           </div>
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-3 gap-1.5 mt-1">
             <button
               type="button"
-              onClick={() => handleFillCredentials('jssathiya012@gmail.com', 'Admin@12345')}
-              className={`p-2 rounded-xl text-xs font-bold text-left border transition-all ${
-                email === 'jssathiya012@gmail.com'
-                  ? 'bg-[#4B2455] text-white border-[#4B2455] shadow-xs'
-                  : 'bg-white text-[#34243A] border-[#D8C2E5] hover:bg-[#F3EFFF]'
+              onClick={() => handleRoleChange('ADMIN')}
+              className={`py-2.5 px-2 rounded-xl text-xs font-bold transition-all flex flex-col items-center gap-1.5 ${
+                selectedRole === 'ADMIN'
+                  ? 'bg-[#4B2455] text-white shadow-xs'
+                  : 'bg-white/80 text-[#34243A] hover:bg-white border border-[#D8C2E5]'
               }`}
             >
-              <div className="flex items-center gap-1.5 mb-0.5">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#A77BB8]" />
-                <span>Admin</span>
-              </div>
-              <p className="text-[9px] opacity-75 truncate">jssathiya012@gmail.com</p>
+              <ShieldCheck className={`w-4 h-4 ${selectedRole === 'ADMIN' ? 'text-[#E9DDF2]' : 'text-[#673B70]'}`} />
+              <span>Admin Portal</span>
             </button>
 
             <button
               type="button"
-              onClick={() => handleFillCredentials('staff@brightloop.com', 'Staff@12345')}
-              className={`p-2 rounded-xl text-xs font-bold text-left border transition-all ${
-                email === 'staff@brightloop.com'
-                  ? 'bg-[#673B70] text-white border-[#673B70] shadow-xs'
-                  : 'bg-white text-[#34243A] border-[#D8C2E5] hover:bg-[#F3EFFF]'
+              onClick={() => handleRoleChange('STAFF')}
+              className={`py-2.5 px-2 rounded-xl text-xs font-bold transition-all flex flex-col items-center gap-1.5 ${
+                selectedRole === 'STAFF'
+                  ? 'bg-[#673B70] text-white shadow-xs'
+                  : 'bg-white/80 text-[#34243A] hover:bg-white border border-[#D8C2E5]'
               }`}
             >
-              <div className="flex items-center gap-1.5 mb-0.5">
-                <UserCheck className="w-3.5 h-3.5 text-[#A77BB8]" />
-                <span>Staff</span>
-              </div>
-              <p className="text-[9px] opacity-75 truncate">staff@brightloop.com</p>
+              <UserCheck className={`w-4 h-4 ${selectedRole === 'STAFF' ? 'text-[#E9DDF2]' : 'text-[#673B70]'}`} />
+              <span>Staff Portal</span>
             </button>
 
             <button
               type="button"
-              onClick={() => handleFillCredentials('demo@brightloop.com', 'Demo@12345')}
-              className={`p-2 rounded-xl text-xs font-bold text-left border transition-all ${
-                email === 'demo@brightloop.com'
-                  ? 'bg-[#673B70] text-white border-[#673B70] shadow-xs'
-                  : 'bg-white text-[#34243A] border-[#D8C2E5] hover:bg-[#F3EFFF]'
+              onClick={() => handleRoleChange('CUSTOMER')}
+              className={`py-2.5 px-2 rounded-xl text-xs font-bold transition-all flex flex-col items-center gap-1.5 ${
+                selectedRole === 'CUSTOMER'
+                  ? 'bg-[#673B70] text-white shadow-xs'
+                  : 'bg-white/80 text-[#34243A] hover:bg-white border border-[#D8C2E5]'
               }`}
             >
-              <div className="flex items-center gap-1.5 mb-0.5">
-                <Users className="w-3.5 h-3.5 text-[#A77BB8]" />
-                <span>Customer</span>
-              </div>
-              <p className="text-[9px] opacity-75 truncate">demo@brightloop.com</p>
+              <Users className={`w-4 h-4 ${selectedRole === 'CUSTOMER' ? 'text-[#E9DDF2]' : 'text-[#673B70]'}`} />
+              <span>Customer</span>
             </button>
           </div>
         </div>
 
-        {/* Main Card */}
+        {/* Main Sign-In Card */}
         <div className="bg-white py-8 px-6 sm:px-10 rounded-3xl shadow-[0_20px_60px_rgba(103,59,112,0.12)] border border-[#E6DDEC]">
+          {/* Portal Header Indicator */}
+          <div className="mb-6 pb-4 border-b border-[#E6DDEC] flex items-center justify-between">
+            <div>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-[#81758A]">
+                Step 2: Authenticate Account
+              </span>
+              <h3 className="text-base font-black text-[#34243A] mt-0.5">
+                {selectedRole === 'ADMIN'
+                  ? 'Administrator Access'
+                  : selectedRole === 'STAFF'
+                  ? 'Staff Member Login'
+                  : 'Customer Account Login'}
+              </h3>
+            </div>
+            <span
+              className={`px-3 py-1 rounded-full text-xs font-bold ${
+                selectedRole === 'ADMIN'
+                  ? 'bg-[#4B2455] text-[#E9DDF2]'
+                  : 'bg-[#F3EFFF] text-[#673B70] border border-[#E6DDEC]'
+              }`}
+            >
+              {selectedRole}
+            </span>
+          </div>
+
           {errorMessage && (
-            <div className="mb-6 p-4 rounded-2xl bg-rose-50 border border-rose-200 text-[#D85B69] text-xs font-semibold flex items-center gap-2">
-              <span>{errorMessage}</span>
+            <div className="mb-6 p-4 rounded-2xl bg-rose-50 border border-rose-200 text-[#D85B69] text-xs font-semibold flex items-start gap-2.5 animate-shake">
+              <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+              <span className="leading-relaxed">{errorMessage}</span>
             </div>
           )}
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
               <label className="block text-xs font-bold uppercase tracking-wider text-[#34243A] mb-1.5">
-                Email Address
+                {selectedRole === 'ADMIN' ? 'Administrator Email' : 'Email Address'}
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#81758A]">
@@ -144,10 +174,20 @@ export const LoginPage: React.FC = () => {
                 <input
                   type="email"
                   required
+                  autoFocus
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="name@company.com"
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#E6DDEC] bg-white text-sm text-[#34243A] placeholder-[#81758A] focus:outline-none focus:border-[#673B70] focus:ring-2 focus:ring-[#673B70]/20 transition-all"
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    if (errorMessage) setErrorMessage('');
+                  }}
+                  placeholder={
+                    selectedRole === 'ADMIN'
+                      ? 'Enter admin email'
+                      : selectedRole === 'STAFF'
+                      ? 'staff@brightloop.com'
+                      : 'customer@example.com'
+                  }
+                  className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#E6DDEC] bg-white text-sm text-[#34243A] placeholder-[#81758A]/60 focus:outline-none focus:border-[#673B70] focus:ring-2 focus:ring-[#673B70]/20 transition-all font-medium"
                 />
               </div>
             </div>
@@ -172,9 +212,12 @@ export const LoginPage: React.FC = () => {
                   type={showPassword ? 'text' : 'password'}
                   required
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••••••"
-                  className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-[#E6DDEC] bg-white text-sm text-[#34243A] placeholder-[#81758A] focus:outline-none focus:border-[#673B70] focus:ring-2 focus:ring-[#673B70]/20 transition-all"
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    if (errorMessage) setErrorMessage('');
+                  }}
+                  placeholder="Min 8 characters with 1 capital letter"
+                  className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-[#E6DDEC] bg-white text-sm text-[#34243A] placeholder-[#81758A]/60 focus:outline-none focus:border-[#673B70] focus:ring-2 focus:ring-[#673B70]/20 transition-all font-medium"
                 />
                 <button
                   type="button"
@@ -184,6 +227,10 @@ export const LoginPage: React.FC = () => {
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
               </div>
+              <p className="text-[10px] text-[#81758A] mt-1.5 flex items-center gap-1">
+                <Info className="w-3 h-3 text-[#673B70]" />
+                <span>Security rule: Minimum 8 characters with at least one capital letter (A-Z).</span>
+              </p>
             </div>
 
             <div className="flex items-center justify-between">
@@ -194,7 +241,7 @@ export const LoginPage: React.FC = () => {
                   onChange={(e) => setRememberMe(e.target.checked)}
                   className="w-4 h-4 rounded text-[#673B70] focus:ring-[#673B70] border-[#D8C2E5]"
                 />
-                <span className="text-xs font-medium text-[#81758A]">Remember me</span>
+                <span className="text-xs font-medium text-[#81758A]">Remember this session</span>
               </label>
             </div>
 
@@ -207,12 +254,25 @@ export const LoginPage: React.FC = () => {
                 <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
               ) : (
                 <>
-                  <span>Sign In to Dashboard</span>
+                  <span>
+                    Sign In to {selectedRole === 'ADMIN' ? 'Admin Control Center' : selectedRole === 'STAFF' ? 'Staff Portal' : 'Customer Portal'}
+                  </span>
                   <ArrowRight className="w-4 h-4" />
                 </>
               )}
             </button>
           </form>
+
+          {/* Customer / Staff sample credentials help (Admin email is hidden for privacy) */}
+          {selectedRole !== 'ADMIN' && (
+            <div className="mt-5 p-3 rounded-2xl bg-[#F3EFFF] border border-[#E6DDEC] text-[11px] text-[#81758A]">
+              <span className="font-bold text-[#34243A]">Sample {selectedRole === 'STAFF' ? 'Staff' : 'Customer'} Login:</span>
+              <p className="mt-0.5">
+                Email: <span className="font-mono text-[#673B70] font-semibold">{selectedRole === 'STAFF' ? 'staff@brightloop.com' : 'demo@brightloop.com'}</span>
+                {' '}| Password: <span className="font-mono text-[#673B70] font-semibold">{selectedRole === 'STAFF' ? 'Staff@12345' : 'Demo@12345'}</span>
+              </p>
+            </div>
+          )}
 
           <div className="mt-6 pt-6 border-t border-[#E6DDEC] text-center">
             <p className="text-xs text-[#81758A]">

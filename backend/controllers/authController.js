@@ -6,12 +6,21 @@ const JWT_SECRET = process.env.JWT_SECRET || 'brightloop-smartsub-jwt-secret-key
 
 export async function login(req, res) {
   try {
-    const { email, password, rememberMe } = req.body;
+    const { email, password, rememberMe, expectedRole } = req.body;
     if (!email || !password) {
       return res.status(400).json({ success: false, message: 'Please provide both email and password.' });
     }
 
-    const user = await DB.User().findOne({ email: email.toLowerCase().trim() });
+    // Password validation rule check: at least 8 characters and at least 1 uppercase letter
+    if (password.length < 8 || !/[A-Z]/.test(password)) {
+      return res.status(400).json({
+        success: false,
+        message: 'Password must be at least 8 characters long and contain at least one uppercase letter (A-Z).'
+      });
+    }
+
+    const cleanEmail = email.toLowerCase().trim();
+    const user = await DB.User().findOne({ email: cleanEmail });
     if (!user) {
       return res.status(401).json({ success: false, message: 'Invalid email or password.' });
     }
@@ -23,6 +32,32 @@ export async function login(req, res) {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(401).json({ success: false, message: 'Invalid email or password.' });
+    }
+
+    // Verify account portal selection
+    if (expectedRole) {
+      if (expectedRole === 'ADMIN') {
+        if (user.role !== 'ADMIN' || cleanEmail !== 'jssathiya012@gmail.com') {
+          return res.status(403).json({
+            success: false,
+            message: 'Access denied: Only authorized administrator credentials can log in to the Admin Portal.'
+          });
+        }
+      } else if (expectedRole === 'STAFF') {
+        if (user.role !== 'STAFF') {
+          return res.status(403).json({
+            success: false,
+            message: 'Access denied: This portal is for Staff members only. Please select the correct account type.'
+          });
+        }
+      } else if (expectedRole === 'CUSTOMER') {
+        if (user.role !== 'CUSTOMER') {
+          return res.status(403).json({
+            success: false,
+            message: 'Access denied: This portal is for Customer accounts only. Please select the correct account type.'
+          });
+        }
+      }
     }
 
     const expiresIn = rememberMe ? '30d' : '24h';
@@ -69,6 +104,14 @@ export async function register(req, res) {
     const { name, email, phone, password, companyName } = req.body;
     if (!name || !email || !password) {
       return res.status(400).json({ success: false, message: 'Name, email, and password are required.' });
+    }
+
+    // Password validation rule check: at least 8 characters and at least 1 uppercase letter
+    if (password.length < 8 || !/[A-Z]/.test(password)) {
+      return res.status(400).json({
+        success: false,
+        message: 'Password must be at least 8 characters long and contain at least one uppercase letter (A-Z).'
+      });
     }
 
     const existing = await DB.User().findOne({ email: email.toLowerCase().trim() });
