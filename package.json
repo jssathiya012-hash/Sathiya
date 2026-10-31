@@ -11,6 +11,7 @@
     "seed": "node backend/seed.js",
     "build": "tsc -b && vite build",
     "start": "node backend/server.js",
+    "tunnel": "npx localtunnel --port 5000",
     "lint": "oxlint",
     "preview": "vite preview"
   },
