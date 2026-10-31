@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { Lock, Mail, Eye, EyeOff, ArrowRight, ShieldCheck, UserCheck, Users, Sparkles } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useSearchParams, Link } from 'react-router-dom';
+import { Lock, Mail, Eye, EyeOff, ArrowRight, ShieldCheck, UserCheck, Users, Sparkles, Check } from 'lucide-react';
 import { useAuthStore } from '../../store/authStore';
 import { BrandLogo } from '../../components/BrandLogo';
 
 export const LoginPage: React.FC = () => {
   const navigate = useNavigate();
-  const { login, isLoading } = useAuthStore();
+  const [searchParams] = useSearchParams();
+  const redirectParam = searchParams.get('redirect');
+  const { login, isAuthenticated, user, isLoading } = useAuthStore();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -14,29 +16,56 @@ export const LoginPage: React.FC = () => {
   const [rememberMe, setRememberMe] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
 
+  // If already logged in, redirect immediately
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      if (redirectParam && (user.role === 'CUSTOMER' || !redirectParam.startsWith('/customer'))) {
+        navigate(redirectParam, { replace: true });
+      } else if (user.role === 'ADMIN') {
+        navigate('/admin/dashboard', { replace: true });
+      } else if (user.role === 'STAFF') {
+        navigate('/staff/dashboard', { replace: true });
+      } else {
+        navigate('/customer/dashboard', { replace: true });
+      }
+    }
+  }, [isAuthenticated, user, redirectParam, navigate]);
+
+  const handleLoginSuccess = (loggedInUser: any) => {
+    if (redirectParam && (loggedInUser.role === 'CUSTOMER' || !redirectParam.startsWith('/customer'))) {
+      navigate(redirectParam);
+    } else if (loggedInUser.role === 'ADMIN') {
+      navigate('/admin/dashboard');
+    } else if (loggedInUser.role === 'STAFF') {
+      navigate('/staff/dashboard');
+    } else {
+      navigate('/customer/dashboard');
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage('');
     try {
-      const user = await login(email, password, rememberMe);
-      // Redirect based on role
-      if (user.role === 'ADMIN') {
-        navigate('/admin/dashboard');
-      } else if (user.role === 'STAFF') {
-        navigate('/staff/dashboard');
-      } else {
-        navigate('/customer/dashboard');
-      }
+      const loggedInUser = await login(email, password, rememberMe);
+      handleLoginSuccess(loggedInUser);
     } catch (err: any) {
       setErrorMessage(err.message || 'Login failed. Please check credentials.');
     }
   };
 
-  const handleQuickFill = (roleEmail: string, rolePass: string) => {
+  const handleQuickLogin = async (roleEmail: string, rolePass: string) => {
     setEmail(roleEmail);
     setPassword(rolePass);
     setErrorMessage('');
+    try {
+      const loggedInUser = await login(roleEmail, rolePass, true);
+      handleLoginSuccess(loggedInUser);
+    } catch (err: any) {
+      setErrorMessage(err.message || 'Login failed.');
+    }
   };
+
 
   return (
     <div className="min-h-screen bg-[#F3EFFF] flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden">
@@ -68,7 +97,7 @@ export const LoginPage: React.FC = () => {
           <div className="grid grid-cols-3 gap-2">
             <button
               type="button"
-              onClick={() => handleQuickFill('admin@brightloop.com', 'Admin@12345')}
+              onClick={() => handleQuickLogin('admin@brightloop.com', 'Admin@12345')}
               className={`p-2 rounded-xl text-xs font-bold text-left border transition-all ${
                 email === 'admin@brightloop.com'
                   ? 'bg-[#4B2455] text-white border-[#4B2455] shadow-xs'
@@ -79,12 +108,12 @@ export const LoginPage: React.FC = () => {
                 <ShieldCheck className="w-3.5 h-3.5 text-[#A77BB8]" />
                 <span>Admin</span>
               </div>
-              <p className="text-[9px] opacity-75 truncate">Full Control</p>
+              <p className="text-[9px] opacity-75 truncate">1-Click Sign In</p>
             </button>
 
             <button
               type="button"
-              onClick={() => handleQuickFill('staff@brightloop.com', 'Staff@12345')}
+              onClick={() => handleQuickLogin('staff@brightloop.com', 'Staff@12345')}
               className={`p-2 rounded-xl text-xs font-bold text-left border transition-all ${
                 email === 'staff@brightloop.com'
                   ? 'bg-[#673B70] text-white border-[#673B70] shadow-xs'
@@ -95,12 +124,12 @@ export const LoginPage: React.FC = () => {
                 <UserCheck className="w-3.5 h-3.5 text-[#A77BB8]" />
                 <span>Staff</span>
               </div>
-              <p className="text-[9px] opacity-75 truncate">Assigned Portal</p>
+              <p className="text-[9px] opacity-75 truncate">1-Click Sign In</p>
             </button>
 
             <button
               type="button"
-              onClick={() => handleQuickFill('demo@brightloop.com', 'Demo@12345')}
+              onClick={() => handleQuickLogin('demo@brightloop.com', 'Demo@12345')}
               className={`p-2 rounded-xl text-xs font-bold text-left border transition-all ${
                 email === 'demo@brightloop.com'
                   ? 'bg-[#673B70] text-white border-[#673B70] shadow-xs'
@@ -111,7 +140,7 @@ export const LoginPage: React.FC = () => {
                 <Users className="w-3.5 h-3.5 text-[#A77BB8]" />
                 <span>Customer</span>
               </div>
-              <p className="text-[9px] opacity-75 truncate">Plans & Subs</p>
+              <p className="text-[9px] opacity-75 truncate">1-Click Sign In</p>
             </button>
           </div>
         </div>

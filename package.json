@@ -4,10 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "concurrently -k -n \"API,APP\" -c \"magenta,cyan\" \"node backend/server.js\" \"vite\"",
+    "dev:frontend": "vite",
+    "dev:backend": "node backend/server.js",
     "server": "node backend/server.js",
     "seed": "node backend/seed.js",
     "build": "tsc -b && vite build",
+    "start": "node backend/server.js",
     "lint": "oxlint",
     "preview": "vite preview"
   },
@@ -46,6 +49,7 @@
     "@types/react": "^18.3.28",
     "@types/react-dom": "^18.3.7",
     "@vitejs/plugin-react": "^6.1.2",
+    "concurrently": "^10.0.6",
     "oxlint": "^1.89.0",
     "typescript": "~7.0.2",
     "vite": "^8.3.5"

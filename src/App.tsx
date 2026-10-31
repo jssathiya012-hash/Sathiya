@@ -46,7 +46,7 @@ import { DashboardLayout } from './layouts/DashboardLayout';
 import { ProtectedRoute } from './components/ProtectedRoute';
 
 export function App() {
-  const { checkAuth } = useAuthStore();
+  const { user, isAuthenticated, checkAuth } = useAuthStore();
 
   useEffect(() => {
     checkAuth();
@@ -360,8 +360,44 @@ export function App() {
         />
 
         {/* Global Fallback */}
-        <Route path="/" element={<Navigate to="/login" replace />} />
-        <Route path="*" element={<Navigate to="/login" replace />} />
+        <Route
+          path="/"
+          element={
+            isAuthenticated && user ? (
+              <Navigate
+                to={
+                  user.role === 'ADMIN'
+                    ? '/admin/dashboard'
+                    : user.role === 'STAFF'
+                    ? '/staff/dashboard'
+                    : '/customer/dashboard'
+                }
+                replace
+              />
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
+        <Route
+          path="*"
+          element={
+            isAuthenticated && user ? (
+              <Navigate
+                to={
+                  user.role === 'ADMIN'
+                    ? '/admin/dashboard'
+                    : user.role === 'STAFF'
+                    ? '/staff/dashboard'
+                    : '/customer/dashboard'
+                }
+                replace
+              />
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

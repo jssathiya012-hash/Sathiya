@@ -554,6 +554,31 @@
       "status": "Expired",
       "paymentStatus": "Successful",
       "autoRenew": false
+    },
+    {
+      "_id": "id_3d61ewe3s",
+      "createdAt": "2026-10-31T08:04:33.105Z",
+      "updatedAt": "2026-10-31T08:04:33.105Z",
+      "subscriptionId": "SUB-1004",
+      "customerId": "id_bc0j7wdf6",
+      "customerName": "Aditi Rao",
+      "customerEmail": "demo@brightloop.com",
+      "productId": "id_w7wahhezm",
+      "productName": "HarmoniX Audio",
+      "planId": "id_yy6189nwo",
+      "planName": "HarmoniX Audio - Starter Monthly",
+      "period": "Monthly",
+      "durationMonths": 1,
+      "originalAmount": 199,
+      "discountAmount": 100,
+      "taxAmount": 18,
+      "finalAmount": 117,
+      "startDate": "2026-10-31T08:04:33.105Z",
+      "endDate": "2026-12-01T08:04:33.105Z",
+      "nextRenewalDate": "2026-12-01T08:04:33.105Z",
+      "status": "Active",
+      "paymentStatus": "Successful",
+      "autoRenew": true
     }
   ],
   "payments": [
@@ -590,18 +615,35 @@
       "transactionRef": "TXN-UPI-44910283",
       "status": "Successful",
       "paidAt": "2026-10-21T07:10:40.622Z"
+    },
+    {
+      "_id": "id_g8tq8dwdi",
+      "createdAt": "2026-10-31T08:04:33.107Z",
+      "updatedAt": "2026-10-31T08:04:33.107Z",
+      "paymentId": "PAY-5003",
+      "subscriptionId": "SUB-1004",
+      "customerId": "id_bc0j7wdf6",
+      "customerName": "Aditi Rao",
+      "customerEmail": "demo@brightloop.com",
+      "amount": 117,
+      "discount": 100,
+      "tax": 18,
+      "method": "UPI",
+      "transactionRef": "TXN-TEST-1234",
+      "status": "Successful",
+      "paidAt": "2026-10-31T08:04:33.107Z"
     }
   ],
   "discounts": [
     {
       "_id": "id_8d46vqtk3",
       "createdAt": "2026-10-31T07:10:40.619Z",
-      "updatedAt": "2026-10-31T07:10:40.619Z",
+      "updatedAt": "2026-10-31T08:04:17.307Z",
       "code": "FESTIVE50",
       "name": "Festive Season 50% Off",
       "type": "PERCENT",
       "value": 50,
-      "minPurchase": 300,
+      "minPurchase": 0,
       "startDate": "2026-10-24T07:10:40.619Z",
       "endDate": "2026-12-30T07:10:40.619Z",
       "usageLimit": 200,
@@ -683,9 +725,54 @@
       "paymentMethod": "UPI",
       "transactionRef": "TXN-UPI-44910283",
       "paymentStatus": "Paid"
+    },
+    {
+      "_id": "id_4t60dlxp4",
+      "createdAt": "2026-10-31T08:04:33.108Z",
+      "updatedAt": "2026-10-31T08:04:33.108Z",
+      "invoiceNumber": "INV-2026-0103",
+      "subscriptionId": "SUB-1004",
+      "customerId": "id_bc0j7wdf6",
+      "customerName": "Aditi Rao",
+      "customerEmail": "demo@brightloop.com",
+      "productName": "HarmoniX Audio",
+      "planName": "HarmoniX Audio - Starter Monthly",
+      "subscriptionDuration": "1 Month",
+      "invoiceDate": "2026-10-31T08:04:33.108Z",
+      "dueDate": "2026-10-31T08:04:33.108Z",
+      "originalPrice": 199,
+      "discountAmount": 100,
+      "taxAmount": 18,
+      "finalAmount": 117,
+      "paymentMethod": "UPI",
+      "transactionRef": "TXN-TEST-1234",
+      "paymentStatus": "Paid"
     }
   ],
-  "notifications": [],
+  "notifications": [
+    {
+      "_id": "id_aoy0wpdha",
+      "createdAt": "2026-10-31T08:04:33.133Z",
+      "updatedAt": "2026-10-31T08:04:33.133Z",
+      "userId": "id_bc0j7wdf6",
+      "role": "CUSTOMER",
+      "title": "Subscription Activated!",
+      "description": "Your subscription to HarmoniX Audio (HarmoniX Audio - Starter Monthly) is now active until 1/12/2026.",
+      "type": "subscription_success",
+      "read": false
+    },
+    {
+      "_id": "id_0ehzvogmt",
+      "createdAt": "2026-10-31T08:04:33.135Z",
+      "updatedAt": "2026-10-31T08:04:33.135Z",
+      "userId": "admin",
+      "role": "ADMIN",
+      "title": "New Subscription Purchase",
+      "description": "Aditi Rao purchased HarmoniX Audio (HarmoniX Audio - Starter Monthly) for ₹117.",
+      "type": "new_subscription",
+      "read": false
+    }
+  ],
   "activityLogs": [
     {
       "_id": "id_1bpw6tjpl",
@@ -719,6 +806,127 @@
       "action": "LOGIN",
       "description": "ADMIN Super Administrator logged in successfully",
       "timestamp": "2026-10-31T07:12:01.580Z"
+    },
+    {
+      "_id": "id_i5s2bugj7",
+      "createdAt": "2026-10-31T07:57:15.187Z",
+      "updatedAt": "2026-10-31T07:57:15.187Z",
+      "userId": "id_bc0j7wdf6",
+      "userName": "Aditi Rao",
+      "userRole": "CUSTOMER",
+      "action": "LOGIN",
+      "description": "CUSTOMER Aditi Rao logged in successfully",
+      "timestamp": "2026-10-31T07:57:15.187Z"
+    },
+    {
+      "_id": "id_2q3l7ofcw",
+      "createdAt": "2026-10-31T08:01:45.791Z",
+      "updatedAt": "2026-10-31T08:01:45.791Z",
+      "userId": "system",
+      "userName": "SmartSub Engine",
+      "userRole": "SYSTEM",
+      "action": "INITIAL_SETUP",
+      "description": "SmartSub platform initialized with demo subscriptions, products, and accounts.",
+      "timestamp": "2026-10-31T08:01:45.789Z"
+    },
+    {
+      "_id": "id_u2uocsn0o",
+      "createdAt": "2026-10-31T08:02:12.799Z",
+      "updatedAt": "2026-10-31T08:02:12.799Z",
+      "userId": "id_bc0j7wdf6",
+      "userName": "Aditi Rao",
+      "userRole": "CUSTOMER",
+      "action": "LOGIN",
+      "description": "CUSTOMER Aditi Rao logged in successfully",
+      "timestamp": "2026-10-31T08:02:12.799Z"
+    },
+    {
+      "_id": "id_99js9j19o",
+      "createdAt": "2026-10-31T08:03:16.098Z",
+      "updatedAt": "2026-10-31T08:03:16.098Z",
+      "userId": "id_bc0j7wdf6",
+      "userName": "Aditi Rao",
+      "userRole": "CUSTOMER",
+      "action": "LOGIN",
+      "description": "CUSTOMER Aditi Rao logged in successfully",
+      "timestamp": "2026-10-31T08:03:16.098Z"
+    },
+    {
+      "_id": "id_yfvn60hge",
+      "createdAt": "2026-10-31T08:03:32.363Z",
+      "updatedAt": "2026-10-31T08:03:32.363Z",
+      "userId": "system",
+      "userName": "SmartSub Engine",
+      "userRole": "SYSTEM",
+      "action": "INITIAL_SETUP",
+      "description": "SmartSub platform initialized with demo subscriptions, products, and accounts.",
+      "timestamp": "2026-10-31T08:03:32.361Z"
+    },
+    {
+      "_id": "id_lpmtq95ln",
+      "createdAt": "2026-10-31T08:03:55.344Z",
+      "updatedAt": "2026-10-31T08:03:55.344Z",
+      "userId": "id_bc0j7wdf6",
+      "userName": "Aditi Rao",
+      "userRole": "CUSTOMER",
+      "action": "LOGIN",
+      "description": "CUSTOMER Aditi Rao logged in successfully",
+      "timestamp": "2026-10-31T08:03:55.344Z"
+    },
+    {
+      "_id": "id_xbulk2kti",
+      "createdAt": "2026-10-31T08:04:17.289Z",
+      "updatedAt": "2026-10-31T08:04:17.289Z",
+      "userId": "id_ej7msbtnl",
+      "userName": "Super Administrator",
+      "userRole": "ADMIN",
+      "action": "LOGIN",
+      "description": "ADMIN Super Administrator logged in successfully",
+      "timestamp": "2026-10-31T08:04:17.289Z"
+    },
+    {
+      "_id": "id_is0ny0ymz",
+      "createdAt": "2026-10-31T08:04:33.059Z",
+      "updatedAt": "2026-10-31T08:04:33.059Z",
+      "userId": "id_bc0j7wdf6",
+      "userName": "Aditi Rao",
+      "userRole": "CUSTOMER",
+      "action": "LOGIN",
+      "description": "CUSTOMER Aditi Rao logged in successfully",
+      "timestamp": "2026-10-31T08:04:33.059Z"
+    },
+    {
+      "_id": "id_a67lwmytp",
+      "createdAt": "2026-10-31T08:04:33.136Z",
+      "updatedAt": "2026-10-31T08:04:33.136Z",
+      "userId": "id_bc0j7wdf6",
+      "userName": "Aditi Rao",
+      "userRole": "CUSTOMER",
+      "action": "SUBSCRIPTION_ACTIVATED",
+      "description": "Subscription SUB-1004 for HarmoniX Audio (HarmoniX Audio - Starter Monthly) activated by Aditi Rao",
+      "timestamp": "2026-10-31T08:04:33.136Z"
+    },
+    {
+      "_id": "id_8esvawcpo",
+      "createdAt": "2026-10-31T08:04:33.238Z",
+      "updatedAt": "2026-10-31T08:04:33.238Z",
+      "userId": "id_ej7msbtnl",
+      "userName": "Super Administrator",
+      "userRole": "ADMIN",
+      "action": "LOGIN",
+      "description": "ADMIN Super Administrator logged in successfully",
+      "timestamp": "2026-10-31T08:04:33.238Z"
+    },
+    {
+      "_id": "id_8p9cyn4kt",
+      "createdAt": "2026-10-31T08:04:57.040Z",
+      "updatedAt": "2026-10-31T08:04:57.040Z",
+      "userId": "id_ej7msbtnl",
+      "userName": "Super Administrator",
+      "userRole": "ADMIN",
+      "action": "LOGIN",
+      "description": "ADMIN Super Administrator logged in successfully",
+      "timestamp": "2026-10-31T08:04:57.040Z"
     }
   ],
   "companySettings": [

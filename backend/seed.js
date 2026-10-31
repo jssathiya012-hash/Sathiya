@@ -239,7 +239,7 @@ export async function seedData() {
       name: 'Festive Season 50% Off',
       type: 'PERCENT',
       value: 50,
-      minPurchase: 300,
+      minPurchase: 0,
       startDate: new Date(Date.now() - 7 * 86400000).toISOString(),
       endDate: new Date(Date.now() + 60 * 86400000).toISOString(),
       usageLimit: 200,
