@@ -8,19 +8,19 @@ export async function seedData() {
   console.log('Seeding initial SmartSub data...');
 
   // 1. Initial Admin
-  const adminEmail = 'admin@brightloop.com';
+  const adminEmail = 'jssathiya012@gmail.com';
   const existingAdmin = await DB.User().findOne({ email: adminEmail });
   if (!existingAdmin) {
     const adminPass = await bcrypt.hash('Admin@12345', 10);
     await DB.User().create({
-      name: 'Super Administrator',
+      name: 'Sathiya (Admin)',
       email: adminEmail,
       password: adminPass,
       role: 'ADMIN',
       phone: '+91 98765 00001',
       isActive: true
     });
-    console.log(' Created Super Admin: admin@brightloop.com / Admin@12345');
+    console.log(' Created Super Admin: jssathiya012@gmail.com / Admin@12345');
   }
 
   // 2. Staff Account

@@ -89,12 +89,11 @@ Engineered strictly with the **Light Lavender & Plum** corporate palette:
 
 | Role | Email | Password |
 |---|---|---|
-| **Admin** | `admin@brightloop.com` | `Admin@12345` |
+| **Admin** | `jssathiya012@gmail.com` | `Admin@12345` |
 | **Staff Member** | `staff@brightloop.com` | `Staff@12345` |
 | **Customer** | `demo@brightloop.com` | `Demo@12345` |
-| **Customer 2** | `sathiya@brightloop.com` | `Sathiya@12345` |
 
-> *Quick Login:* The Login screen features 1-click credential switcher buttons for instant testing.
+> *Login Flow:* Enter your email and password, then click "Sign In to Dashboard" to verify credentials and open your role workspace. Quick-fill buttons are provided to easily populate the form fields.
 
 ---
 

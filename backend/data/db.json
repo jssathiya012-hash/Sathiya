@@ -4,9 +4,9 @@
       "_id": "id_ej7msbtnl",
       "createdAt": "2026-10-31T07:10:40.359Z",
       "updatedAt": "2026-10-31T07:10:40.361Z",
-      "name": "Super Administrator",
-      "email": "admin@brightloop.com",
-      "password": "$2b$10$8YYJI6tlArU0SKatMEqAM..EG2m8AbdVccIWJznQWFiPsvP6xvGvi",
+      "name": "Sathiya (Admin)",
+      "email": "jssathiya012@gmail.com",
+      "password": "$2b$10$DW5Gu9B94e/h5fO22qB0Jux2kaPRLl2aYFLCzGD7RLvk9Zf.qYkLa",
       "role": "ADMIN",
       "phone": "+91 98765 00001",
       "isActive": true
@@ -483,7 +483,7 @@
     {
       "_id": "id_c0tjschrz",
       "createdAt": "2026-10-31T07:10:40.622Z",
-      "updatedAt": "2026-10-31T07:10:40.622Z",
+      "updatedAt": "2026-10-31T08:13:52.878Z",
       "subscriptionId": "SUB-1001",
       "customerId": "id_bc0j7wdf6",
       "customerName": "Aditi Rao",
@@ -499,8 +499,8 @@
       "taxAmount": 32,
       "finalAmount": 211,
       "startDate": "2026-10-26T07:10:40.622Z",
-      "endDate": "2026-11-25T07:10:40.622Z",
-      "nextRenewalDate": "2026-11-25T07:10:40.622Z",
+      "endDate": "2026-12-25T07:10:40.622Z",
+      "nextRenewalDate": "2026-12-25T07:10:40.622Z",
       "status": "Active",
       "paymentStatus": "Successful",
       "autoRenew": true
@@ -632,6 +632,21 @@
       "transactionRef": "TXN-TEST-1234",
       "status": "Successful",
       "paidAt": "2026-10-31T08:04:33.107Z"
+    },
+    {
+      "_id": "id_l625bw3zb",
+      "createdAt": "2026-10-31T08:13:52.879Z",
+      "updatedAt": "2026-10-31T08:13:52.879Z",
+      "paymentId": "PAY-5004",
+      "subscriptionId": "SUB-1001",
+      "customerId": "id_bc0j7wdf6",
+      "customerName": "Aditi Rao",
+      "customerEmail": "demo@brightloop.com",
+      "amount": 211,
+      "method": "Card",
+      "transactionRef": "TXN-RNW-C8WSUDY",
+      "status": "Successful",
+      "paidAt": "2026-10-31T08:13:52.879Z"
     }
   ],
   "discounts": [
@@ -746,6 +761,28 @@
       "finalAmount": 117,
       "paymentMethod": "UPI",
       "transactionRef": "TXN-TEST-1234",
+      "paymentStatus": "Paid"
+    },
+    {
+      "_id": "id_ediw0eyc4",
+      "createdAt": "2026-10-31T08:13:52.881Z",
+      "updatedAt": "2026-10-31T08:13:52.881Z",
+      "invoiceNumber": "INV-2026-0104",
+      "subscriptionId": "SUB-1001",
+      "customerId": "id_bc0j7wdf6",
+      "customerName": "Aditi Rao",
+      "customerEmail": "demo@brightloop.com",
+      "productName": "HarmoniX Audio",
+      "planName": "HarmoniX Audio - Starter Monthly",
+      "subscriptionDuration": "1 Month renewal",
+      "invoiceDate": "2026-10-31T08:13:52.881Z",
+      "dueDate": "2026-10-31T08:13:52.881Z",
+      "originalPrice": 199,
+      "discountAmount": 20,
+      "taxAmount": 32,
+      "finalAmount": 211,
+      "paymentMethod": "Card",
+      "transactionRef": "TXN-RNW-C8WSUDY",
       "paymentStatus": "Paid"
     }
   ],
@@ -927,6 +964,204 @@
       "action": "LOGIN",
       "description": "ADMIN Super Administrator logged in successfully",
       "timestamp": "2026-10-31T08:04:57.040Z"
+    },
+    {
+      "_id": "id_los3esedr",
+      "createdAt": "2026-10-31T08:09:10.407Z",
+      "updatedAt": "2026-10-31T08:09:10.408Z",
+      "userId": "id_ej7msbtnl",
+      "userName": "Super Administrator",
+      "userRole": "ADMIN",
+      "action": "LOGIN",
+      "description": "ADMIN Super Administrator logged in successfully",
+      "timestamp": "2026-10-31T08:09:10.407Z"
+    },
+    {
+      "_id": "id_bqpkofvwm",
+      "createdAt": "2026-10-31T08:12:47.364Z",
+      "updatedAt": "2026-10-31T08:12:47.364Z",
+      "userId": "id_uyoa3mkk3",
+      "userName": "Rahul Sharma",
+      "userRole": "STAFF",
+      "action": "LOGIN",
+      "description": "STAFF Rahul Sharma logged in successfully",
+      "timestamp": "2026-10-31T08:12:47.364Z"
+    },
+    {
+      "_id": "id_rw3s529gp",
+      "createdAt": "2026-10-31T08:13:39.184Z",
+      "updatedAt": "2026-10-31T08:13:39.184Z",
+      "userId": "id_bc0j7wdf6",
+      "userName": "Aditi Rao",
+      "userRole": "CUSTOMER",
+      "action": "LOGIN",
+      "description": "CUSTOMER Aditi Rao logged in successfully",
+      "timestamp": "2026-10-31T08:13:39.184Z"
+    },
+    {
+      "_id": "id_6s39y0yaa",
+      "createdAt": "2026-10-31T08:13:52.882Z",
+      "updatedAt": "2026-10-31T08:13:52.882Z",
+      "userId": "id_bc0j7wdf6",
+      "userName": "Aditi Rao",
+      "userRole": "CUSTOMER",
+      "action": "SUBSCRIPTION_RENEWED",
+      "description": "Subscription SUB-1001 (HarmoniX Audio) renewed until 25/12/2026",
+      "timestamp": "2026-10-31T08:13:52.882Z"
+    },
+    {
+      "_id": "id_r0h27k6te",
+      "createdAt": "2026-10-31T08:15:32.134Z",
+      "updatedAt": "2026-10-31T08:15:32.134Z",
+      "userId": "id_ej7msbtnl",
+      "userName": "Super Administrator",
+      "userRole": "ADMIN",
+      "action": "LOGIN",
+      "description": "ADMIN Super Administrator logged in successfully",
+      "timestamp": "2026-10-31T08:15:32.134Z"
+    },
+    {
+      "_id": "id_d5fhk8f3f",
+      "createdAt": "2026-10-31T08:21:27.851Z",
+      "updatedAt": "2026-10-31T08:21:27.851Z",
+      "userId": "id_uyoa3mkk3",
+      "userName": "Rahul Sharma",
+      "userRole": "STAFF",
+      "action": "LOGIN",
+      "description": "STAFF Rahul Sharma logged in successfully",
+      "timestamp": "2026-10-31T08:21:27.851Z"
+    },
+    {
+      "_id": "id_ma9eaguv7",
+      "createdAt": "2026-10-31T08:44:57.369Z",
+      "updatedAt": "2026-10-31T08:44:57.369Z",
+      "userId": "id_bc0j7wdf6",
+      "userName": "Aditi Rao",
+      "userRole": "CUSTOMER",
+      "action": "LOGIN",
+      "description": "CUSTOMER Aditi Rao logged in successfully",
+      "timestamp": "2026-10-31T08:44:57.369Z"
+    },
+    {
+      "_id": "id_2vaqynxo2",
+      "createdAt": "2026-10-31T08:45:00.978Z",
+      "updatedAt": "2026-10-31T08:45:00.978Z",
+      "userId": "id_ej7msbtnl",
+      "userName": "Super Administrator",
+      "userRole": "ADMIN",
+      "action": "LOGIN",
+      "description": "ADMIN Super Administrator logged in successfully",
+      "timestamp": "2026-10-31T08:45:00.978Z"
+    },
+    {
+      "_id": "id_63rmrlk4o",
+      "createdAt": "2026-10-31T08:45:13.415Z",
+      "updatedAt": "2026-10-31T08:45:13.415Z",
+      "userId": "id_uyoa3mkk3",
+      "userName": "Rahul Sharma",
+      "userRole": "STAFF",
+      "action": "LOGIN",
+      "description": "STAFF Rahul Sharma logged in successfully",
+      "timestamp": "2026-10-31T08:45:13.415Z"
+    },
+    {
+      "_id": "id_2tfzbex9n",
+      "createdAt": "2026-10-31T08:45:19.075Z",
+      "updatedAt": "2026-10-31T08:45:19.075Z",
+      "userId": "id_ej7msbtnl",
+      "userName": "Super Administrator",
+      "userRole": "ADMIN",
+      "action": "LOGIN",
+      "description": "ADMIN Super Administrator logged in successfully",
+      "timestamp": "2026-10-31T08:45:19.075Z"
+    },
+    {
+      "_id": "id_tkznifk10",
+      "createdAt": "2026-10-31T08:45:24.923Z",
+      "updatedAt": "2026-10-31T08:45:24.923Z",
+      "userId": "id_uyoa3mkk3",
+      "userName": "Rahul Sharma",
+      "userRole": "STAFF",
+      "action": "LOGIN",
+      "description": "STAFF Rahul Sharma logged in successfully",
+      "timestamp": "2026-10-31T08:45:24.923Z"
+    },
+    {
+      "_id": "id_yueq1l0t0",
+      "createdAt": "2026-10-31T08:57:58.627Z",
+      "updatedAt": "2026-10-31T08:57:58.627Z",
+      "userId": "id_bc0j7wdf6",
+      "userName": "Aditi Rao",
+      "userRole": "CUSTOMER",
+      "action": "LOGIN",
+      "description": "CUSTOMER Aditi Rao logged in successfully",
+      "timestamp": "2026-10-31T08:57:58.627Z"
+    },
+    {
+      "_id": "id_ztubdbso1",
+      "createdAt": "2026-10-31T09:05:13.349Z",
+      "updatedAt": "2026-10-31T09:05:13.349Z",
+      "userId": "id_ej7msbtnl",
+      "userName": "Super Administrator",
+      "userRole": "ADMIN",
+      "action": "LOGIN",
+      "description": "ADMIN Super Administrator logged in successfully",
+      "timestamp": "2026-10-31T09:05:13.349Z"
+    },
+    {
+      "_id": "id_976pk77xz",
+      "createdAt": "2026-10-31T09:05:44.685Z",
+      "updatedAt": "2026-10-31T09:05:44.685Z",
+      "userId": "id_uyoa3mkk3",
+      "userName": "Rahul Sharma",
+      "userRole": "STAFF",
+      "action": "LOGIN",
+      "description": "STAFF Rahul Sharma logged in successfully",
+      "timestamp": "2026-10-31T09:05:44.685Z"
+    },
+    {
+      "_id": "id_t8127d61v",
+      "createdAt": "2026-10-31T09:07:59.569Z",
+      "updatedAt": "2026-10-31T09:07:59.569Z",
+      "userId": "system",
+      "userName": "SmartSub Engine",
+      "userRole": "SYSTEM",
+      "action": "INITIAL_SETUP",
+      "description": "SmartSub platform initialized with demo subscriptions, products, and accounts.",
+      "timestamp": "2026-10-31T09:07:59.568Z"
+    },
+    {
+      "_id": "id_xrws5c28q",
+      "createdAt": "2026-10-31T09:08:21.886Z",
+      "updatedAt": "2026-10-31T09:08:21.886Z",
+      "userId": "id_ej7msbtnl",
+      "userName": "Sathiya (Admin)",
+      "userRole": "ADMIN",
+      "action": "LOGIN",
+      "description": "ADMIN Sathiya (Admin) logged in successfully",
+      "timestamp": "2026-10-31T09:08:21.886Z"
+    },
+    {
+      "_id": "id_cfc8yyf2g",
+      "createdAt": "2026-10-31T09:08:22.126Z",
+      "updatedAt": "2026-10-31T09:08:22.126Z",
+      "userId": "id_bc0j7wdf6",
+      "userName": "Aditi Rao",
+      "userRole": "CUSTOMER",
+      "action": "LOGIN",
+      "description": "CUSTOMER Aditi Rao logged in successfully",
+      "timestamp": "2026-10-31T09:08:22.126Z"
+    },
+    {
+      "_id": "id_ouiudb22e",
+      "createdAt": "2026-10-31T09:08:22.313Z",
+      "updatedAt": "2026-10-31T09:08:22.313Z",
+      "userId": "id_uyoa3mkk3",
+      "userName": "Rahul Sharma",
+      "userRole": "STAFF",
+      "action": "LOGIN",
+      "description": "STAFF Rahul Sharma logged in successfully",
+      "timestamp": "2026-10-31T09:08:22.313Z"
     }
   ],
   "companySettings": [

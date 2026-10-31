@@ -8,28 +8,13 @@ export const LoginPage: React.FC = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const redirectParam = searchParams.get('redirect');
-  const { login, isAuthenticated, user, isLoading } = useAuthStore();
+  const { login, isLoading } = useAuthStore();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
-
-  // If already logged in, redirect immediately
-  useEffect(() => {
-    if (isAuthenticated && user) {
-      if (redirectParam && (user.role === 'CUSTOMER' || !redirectParam.startsWith('/customer'))) {
-        navigate(redirectParam, { replace: true });
-      } else if (user.role === 'ADMIN') {
-        navigate('/admin/dashboard', { replace: true });
-      } else if (user.role === 'STAFF') {
-        navigate('/staff/dashboard', { replace: true });
-      } else {
-        navigate('/customer/dashboard', { replace: true });
-      }
-    }
-  }, [isAuthenticated, user, redirectParam, navigate]);
 
   const handleLoginSuccess = (loggedInUser: any) => {
     if (redirectParam && (loggedInUser.role === 'CUSTOMER' || !redirectParam.startsWith('/customer'))) {
@@ -50,22 +35,16 @@ export const LoginPage: React.FC = () => {
       const loggedInUser = await login(email, password, rememberMe);
       handleLoginSuccess(loggedInUser);
     } catch (err: any) {
-      setErrorMessage(err.message || 'Login failed. Please check credentials.');
+      setErrorMessage(err.message || 'Invalid email or password. Please check credentials.');
     }
   };
 
-  const handleQuickLogin = async (roleEmail: string, rolePass: string) => {
-    setEmail(roleEmail);
-    setPassword(rolePass);
+  // Only auto-populates credentials in the form fields — does NOT log in automatically
+  const handleFillCredentials = (fillEmail: string, fillPass: string) => {
+    setEmail(fillEmail);
+    setPassword(fillPass);
     setErrorMessage('');
-    try {
-      const loggedInUser = await login(roleEmail, rolePass, true);
-      handleLoginSuccess(loggedInUser);
-    } catch (err: any) {
-      setErrorMessage(err.message || 'Login failed.');
-    }
   };
-
 
   return (
     <div className="min-h-screen bg-[#F3EFFF] flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden">
@@ -86,20 +65,20 @@ export const LoginPage: React.FC = () => {
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md z-10 px-4">
-        {/* Quick Demo Selector */}
+        {/* Quick Demo Fill Selector */}
         <div className="bg-[#E9DDF2]/70 border border-[#D8C2E5] rounded-2xl p-3 mb-6 shadow-xs">
           <div className="flex items-center justify-between mb-2 px-1">
             <span className="text-[11px] font-bold uppercase tracking-wider text-[#4B2455] flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-[#673B70]" /> Demo Quick Sign-In
+              <Sparkles className="w-3.5 h-3.5 text-[#673B70]" /> Quick Fill Demo Credentials
             </span>
-            <span className="text-[10px] text-[#81758A]">Select role</span>
+            <span className="text-[10px] text-[#81758A]">Fills input fields</span>
           </div>
           <div className="grid grid-cols-3 gap-2">
             <button
               type="button"
-              onClick={() => handleQuickLogin('admin@brightloop.com', 'Admin@12345')}
+              onClick={() => handleFillCredentials('jssathiya012@gmail.com', 'Admin@12345')}
               className={`p-2 rounded-xl text-xs font-bold text-left border transition-all ${
-                email === 'admin@brightloop.com'
+                email === 'jssathiya012@gmail.com'
                   ? 'bg-[#4B2455] text-white border-[#4B2455] shadow-xs'
                   : 'bg-white text-[#34243A] border-[#D8C2E5] hover:bg-[#F3EFFF]'
               }`}
@@ -108,12 +87,12 @@ export const LoginPage: React.FC = () => {
                 <ShieldCheck className="w-3.5 h-3.5 text-[#A77BB8]" />
                 <span>Admin</span>
               </div>
-              <p className="text-[9px] opacity-75 truncate">1-Click Sign In</p>
+              <p className="text-[9px] opacity-75 truncate">jssathiya012@gmail.com</p>
             </button>
 
             <button
               type="button"
-              onClick={() => handleQuickLogin('staff@brightloop.com', 'Staff@12345')}
+              onClick={() => handleFillCredentials('staff@brightloop.com', 'Staff@12345')}
               className={`p-2 rounded-xl text-xs font-bold text-left border transition-all ${
                 email === 'staff@brightloop.com'
                   ? 'bg-[#673B70] text-white border-[#673B70] shadow-xs'
@@ -124,12 +103,12 @@ export const LoginPage: React.FC = () => {
                 <UserCheck className="w-3.5 h-3.5 text-[#A77BB8]" />
                 <span>Staff</span>
               </div>
-              <p className="text-[9px] opacity-75 truncate">1-Click Sign In</p>
+              <p className="text-[9px] opacity-75 truncate">staff@brightloop.com</p>
             </button>
 
             <button
               type="button"
-              onClick={() => handleQuickLogin('demo@brightloop.com', 'Demo@12345')}
+              onClick={() => handleFillCredentials('demo@brightloop.com', 'Demo@12345')}
               className={`p-2 rounded-xl text-xs font-bold text-left border transition-all ${
                 email === 'demo@brightloop.com'
                   ? 'bg-[#673B70] text-white border-[#673B70] shadow-xs'
@@ -140,7 +119,7 @@ export const LoginPage: React.FC = () => {
                 <Users className="w-3.5 h-3.5 text-[#A77BB8]" />
                 <span>Customer</span>
               </div>
-              <p className="text-[9px] opacity-75 truncate">1-Click Sign In</p>
+              <p className="text-[9px] opacity-75 truncate">demo@brightloop.com</p>
             </button>
           </div>
         </div>
