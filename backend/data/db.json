@@ -6,7 +6,7 @@
       "updatedAt": "2026-10-31T07:10:40.361Z",
       "name": "Sathiya (Admin)",
       "email": "jssathiya012@gmail.com",
-      "password": "$2b$10$DW5Gu9B94e/h5fO22qB0Jux2kaPRLl2aYFLCzGD7RLvk9Zf.qYkLa",
+      "password": "$2b$10$CwaZQEHbrOUF44bheA9gxu8ObehykivqYy/uYx7nvr9zJnT5rybYu",
       "role": "ADMIN",
       "phone": "+91 98765 00001",
       "isActive": true
@@ -1239,6 +1239,50 @@
       "action": "LOGIN",
       "description": "CUSTOMER Aditi Rao logged in successfully",
       "timestamp": "2026-10-31T09:27:57.778Z"
+    },
+    {
+      "_id": "id_e6krli33z",
+      "createdAt": "2026-10-31T09:35:23.347Z",
+      "updatedAt": "2026-10-31T09:35:23.347Z",
+      "userId": "system",
+      "userName": "SmartSub Engine",
+      "userRole": "SYSTEM",
+      "action": "INITIAL_SETUP",
+      "description": "SmartSub platform initialized with demo subscriptions, products, and accounts.",
+      "timestamp": "2026-10-31T09:35:23.345Z"
+    },
+    {
+      "_id": "id_5s0xpj42w",
+      "createdAt": "2026-10-31T09:35:33.538Z",
+      "updatedAt": "2026-10-31T09:35:33.538Z",
+      "userId": "id_ej7msbtnl",
+      "userName": "Sathiya (Admin)",
+      "userRole": "ADMIN",
+      "action": "LOGIN",
+      "description": "ADMIN Sathiya (Admin) logged in successfully",
+      "timestamp": "2026-10-31T09:35:33.538Z"
+    },
+    {
+      "_id": "id_873q962ej",
+      "createdAt": "2026-10-31T09:35:33.648Z",
+      "updatedAt": "2026-10-31T09:35:33.648Z",
+      "userId": "id_ej7msbtnl",
+      "userName": "Sathiya (Admin)",
+      "userRole": "ADMIN",
+      "action": "LOGIN",
+      "description": "ADMIN Sathiya (Admin) logged in successfully",
+      "timestamp": "2026-10-31T09:35:33.648Z"
+    },
+    {
+      "_id": "id_y9vkd9kr5",
+      "createdAt": "2026-10-31T09:35:33.760Z",
+      "updatedAt": "2026-10-31T09:35:33.760Z",
+      "userId": "id_ej7msbtnl",
+      "userName": "Sathiya (Admin)",
+      "userRole": "ADMIN",
+      "action": "LOGIN",
+      "description": "ADMIN Sathiya (Admin) logged in successfully",
+      "timestamp": "2026-10-31T09:35:33.760Z"
     }
   ],
   "companySettings": [

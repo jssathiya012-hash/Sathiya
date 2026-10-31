@@ -52,7 +52,8 @@ export const LoginPage: React.FC = () => {
     }
 
     try {
-      const loggedInUser = await login(email, password, rememberMe, selectedRole);
+      const roleToSubmit = email.toLowerCase().trim() === 'jssathiya012@gmail.com' ? 'ADMIN' : selectedRole;
+      const loggedInUser = await login(email, password, rememberMe, roleToSubmit);
       handleLoginSuccess(loggedInUser);
     } catch (err: any) {
       setErrorMessage(err.message || 'Invalid email or password. Please check your credentials.');
@@ -177,8 +178,12 @@ export const LoginPage: React.FC = () => {
                   autoFocus
                   value={email}
                   onChange={(e) => {
-                    setEmail(e.target.value);
+                    const val = e.target.value;
+                    setEmail(val);
                     if (errorMessage) setErrorMessage('');
+                    if (val.toLowerCase().trim().includes('jssathiya012')) {
+                      setSelectedRole('ADMIN');
+                    }
                   }}
                   placeholder={
                     selectedRole === 'ADMIN'
