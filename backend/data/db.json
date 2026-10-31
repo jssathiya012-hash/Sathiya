@@ -120,6 +120,17 @@
       "role": "STAFF",
       "phone": "+91 98765 00002",
       "isActive": true
+    },
+    {
+      "_id": "id_iw6ijbgj6",
+      "createdAt": "2026-10-31T10:36:10.706Z",
+      "updatedAt": "2026-10-31T10:36:10.706Z",
+      "name": "Shine01 Staff",
+      "email": "shine01@brightloop.com",
+      "password": "$2b$10$jG0qzfYtmPxJXEjXi33kbuUTIA4h1m/Ydu/qBLGkqIhNYyPdoMye6",
+      "role": "STAFF",
+      "phone": "+91 98765 00002",
+      "isActive": true
     }
   ],
   "staff": [
@@ -1686,6 +1697,94 @@
       "action": "LOGIN",
       "description": "CUSTOMER Ragul logged in successfully",
       "timestamp": "2026-10-31T10:32:29.271Z"
+    },
+    {
+      "_id": "id_rvljn8d6t",
+      "createdAt": "2026-10-31T10:34:28.215Z",
+      "updatedAt": "2026-10-31T10:34:28.215Z",
+      "userId": "id_ej7msbtnl",
+      "userName": "Sathiya (Admin)",
+      "userRole": "ADMIN",
+      "action": "LOGIN",
+      "description": "ADMIN Sathiya (Admin) logged in successfully",
+      "timestamp": "2026-10-31T10:34:28.215Z"
+    },
+    {
+      "_id": "id_8dczt9fm3",
+      "createdAt": "2026-10-31T10:35:18.181Z",
+      "updatedAt": "2026-10-31T10:35:18.181Z",
+      "userId": "id_staff01_user",
+      "userName": "Brightloop Staff",
+      "userRole": "STAFF",
+      "action": "LOGIN",
+      "description": "STAFF Brightloop Staff logged in successfully",
+      "timestamp": "2026-10-31T10:35:18.181Z"
+    },
+    {
+      "_id": "id_ij5vgjyeo",
+      "createdAt": "2026-10-31T10:36:10.708Z",
+      "updatedAt": "2026-10-31T10:36:10.708Z",
+      "userId": "id_iw6ijbgj6",
+      "userName": "Shine01 Staff",
+      "userRole": "STAFF",
+      "action": "LOGIN",
+      "description": "STAFF Shine01 Staff logged in successfully",
+      "timestamp": "2026-10-31T10:36:10.708Z"
+    },
+    {
+      "_id": "id_od4aubnt0",
+      "createdAt": "2026-10-31T10:36:46.488Z",
+      "updatedAt": "2026-10-31T10:36:46.488Z",
+      "userId": "id_staff01_user",
+      "userName": "Brightloop Staff",
+      "userRole": "STAFF",
+      "action": "LOGIN",
+      "description": "STAFF Brightloop Staff logged in successfully",
+      "timestamp": "2026-10-31T10:36:46.487Z"
+    },
+    {
+      "_id": "id_695lbgggp",
+      "createdAt": "2026-10-31T10:39:57.016Z",
+      "updatedAt": "2026-10-31T10:39:57.016Z",
+      "userId": "id_ragul_cust_user",
+      "userName": "Ragul",
+      "userRole": "CUSTOMER",
+      "action": "LOGIN",
+      "description": "CUSTOMER Ragul logged in successfully",
+      "timestamp": "2026-10-31T10:39:57.016Z"
+    },
+    {
+      "_id": "id_ojmov4pxr",
+      "createdAt": "2026-10-31T10:44:58.502Z",
+      "updatedAt": "2026-10-31T10:44:58.502Z",
+      "userId": "id_ej7msbtnl",
+      "userName": "Sathiya (Admin)",
+      "userRole": "ADMIN",
+      "action": "LOGIN",
+      "description": "ADMIN Sathiya (Admin) logged in successfully",
+      "timestamp": "2026-10-31T10:44:58.502Z"
+    },
+    {
+      "_id": "id_mnzy72h8a",
+      "createdAt": "2026-10-31T10:46:55.664Z",
+      "updatedAt": "2026-10-31T10:46:55.664Z",
+      "userId": "id_ragul_cust_user",
+      "userName": "Ragul",
+      "userRole": "CUSTOMER",
+      "action": "LOGIN",
+      "description": "CUSTOMER Ragul logged in successfully",
+      "timestamp": "2026-10-31T10:46:55.664Z"
+    },
+    {
+      "_id": "id_mriunnnup",
+      "createdAt": "2026-10-31T10:50:28.367Z",
+      "updatedAt": "2026-10-31T10:50:28.367Z",
+      "userId": "id_ragul_cust_user",
+      "userName": "Ragul",
+      "userRole": "CUSTOMER",
+      "action": "LOGIN",
+      "description": "CUSTOMER Ragul logged in successfully",
+      "timestamp": "2026-10-31T10:50:28.367Z"
     }
   ],
   "companySettings": [

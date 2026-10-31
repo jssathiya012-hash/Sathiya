@@ -189,7 +189,7 @@ export const LoginPage: React.FC = () => {
                       ? 'Enter admin email'
                       : selectedRole === 'STAFF'
                       ? 'staff01@brightloop.com'
-                      : 'ragul012@gmail.com'
+                      : 'Enter customer email'
                   }
                   className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#E6DDEC] bg-white text-sm text-[#34243A] placeholder-[#81758A]/60 focus:outline-none focus:border-[#673B70] focus:ring-2 focus:ring-[#673B70]/20 transition-all font-medium"
                 />
@@ -225,7 +225,7 @@ export const LoginPage: React.FC = () => {
                       ? 'Enter admin password'
                       : selectedRole === 'STAFF'
                       ? 'staff@01'
-                      : 'Ragul@01'
+                      : 'Enter customer password'
                   }
                   className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-[#E6DDEC] bg-white text-sm text-[#34243A] placeholder-[#81758A]/60 focus:outline-none focus:border-[#673B70] focus:ring-2 focus:ring-[#673B70]/20 transition-all font-medium"
                 />
@@ -243,7 +243,7 @@ export const LoginPage: React.FC = () => {
                   {selectedRole === 'STAFF'
                     ? 'Staff credentials: Fixed email staff01@brightloop.com and password staff@01.'
                     : selectedRole === 'CUSTOMER'
-                    ? 'Customer credentials: Fixed email ragul012@gmail.com and password Ragul@01.'
+                    ? 'Customer portal: Enter your registered customer credentials.'
                     : 'Confidential administrative portal. Protected credentials required.'}
                 </span>
               </p>
@@ -279,26 +279,16 @@ export const LoginPage: React.FC = () => {
             </button>
           </form>
 
-          {/* Customer / Staff sample credentials help (Admin email is hidden for privacy) */}
-          {selectedRole !== 'ADMIN' && (
+          {/* Staff credentials help (Admin and Customer credentials are kept private/hidden) */}
+          {selectedRole === 'STAFF' && (
             <div className="mt-5 p-3 rounded-2xl bg-[#F3EFFF] border border-[#E6DDEC] text-[11px] text-[#81758A]">
               <span className="font-bold text-[#34243A]">
-                {selectedRole === 'STAFF' ? 'Staff Portal Credentials:' : 'Customer Portal Credentials:'}
+                Staff Portal Credentials:
               </span>
               <p className="mt-0.5">
-                {selectedRole === 'STAFF' ? (
-                  <>
-                    Email: <span className="font-mono text-[#673B70] font-semibold">staff01@brightloop.com</span>
-                    {' '}| Password: <span className="font-mono text-[#673B70] font-semibold">staff@01</span>
-                    <span className="block text-[10px] text-[#81758A] mt-0.5">(Fixed credentials for staff login)</span>
-                  </>
-                ) : (
-                  <>
-                    Email: <span className="font-mono text-[#673B70] font-semibold">ragul012@gmail.com</span>
-                    {' '}| Password: <span className="font-mono text-[#673B70] font-semibold">Ragul@01</span>
-                    <span className="block text-[10px] text-[#81758A] mt-0.5">(Fixed credentials for customer login)</span>
-                  </>
-                )}
+                Email: <span className="font-mono text-[#673B70] font-semibold">staff01@brightloop.com</span>
+                {' '}| Password: <span className="font-mono text-[#673B70] font-semibold">staff@01</span>
+                <span className="block text-[10px] text-[#81758A] mt-0.5">(Fixed credentials for staff login)</span>
               </p>
             </div>
           )}
