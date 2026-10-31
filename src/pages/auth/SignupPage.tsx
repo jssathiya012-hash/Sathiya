@@ -1,85 +1,238 @@
-import { useMemo, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Link, useNavigate } from 'react-router-dom'
-import toast from 'react-hot-toast'
-import { Check, LoaderCircle } from 'lucide-react'
-import { AuthLayout } from '../../components/AuthLayout'
-import { PasswordInput } from '../../components/PasswordInput'
-import { signup } from '../../api/mockApi'
-import { useAppStore } from '../../store/appStore'
-import { isValidPassword, passwordChecks } from '../../lib/validators'
+import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { Lock, Mail, User, Phone, Building, ArrowRight, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { useAuthStore } from '../../store/authStore';
+import { BrandLogo } from '../../components/BrandLogo';
 
-const schema = z.object({
-  name: z.string().trim().min(2, 'Enter your full name'),
-  email: z.string().trim().email('Enter a valid email address'),
-  password: z.string().refine(isValidPassword, 'Your password needs all four requirements below'),
-  confirmPassword: z.string(),
-}).refine(data => data.password === data.confirmPassword, { message: 'Passwords do not match', path: ['confirmPassword'] })
-type FormData = z.infer<typeof schema>
+export const SignupPage: React.FC = () => {
+  const navigate = useNavigate();
+  const { register, isLoading } = useAuthStore();
 
-export function SignupPage() {
-  const navigate = useNavigate()
-  const setUser = useAppStore(state => state.setUser)
-  const [loading, setLoading] = useState(false)
-  const { register, handleSubmit, watch, formState: { errors } } = useForm<FormData>({ resolver: zodResolver(schema) })
-  const password = watch('password', '')
-  const checks = useMemo(() => passwordChecks(password), [password])
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [companyName, setCompanyName] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [termsAccepted, setTermsAccepted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const submit = async (values: FormData) => {
-    setLoading(true)
-    try {
-      const user = await signup(values.name, values.email, values.password)
-      setUser(user)
-      toast.success('Your account is ready!')
-      navigate('/dashboard')
-    } catch (error) {
-      toast.error(error instanceof Error ? error.message : 'Could not create your account.')
-    } finally {
-      setLoading(false)
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setErrorMessage('');
+
+    if (password !== confirmPassword) {
+      setErrorMessage('Passwords do not match.');
+      return;
     }
-  }
 
-  const requirements = [
-    [checks.length, 'More than 8 characters'],
-    [checks.uppercase, 'One uppercase letter'],
-    [checks.lowercase, 'One lowercase letter'],
-    [checks.special, 'One special character'],
-  ] as const
+    if (password.length < 6) {
+      setErrorMessage('Password must be at least 6 characters.');
+      return;
+    }
+
+    if (!termsAccepted) {
+      setErrorMessage('Please accept the Terms of Service to continue.');
+      return;
+    }
+
+    try {
+      await register({
+        name,
+        email,
+        phone,
+        companyName,
+        password,
+      });
+      navigate('/customer/dashboard');
+    } catch (err: any) {
+      setErrorMessage(err.message || 'Registration failed.');
+    }
+  };
 
   return (
-    <AuthLayout title="Create your account" subtitle="Start managing subscriptions and billing.">
-      <form onSubmit={handleSubmit(submit)} className="space-y-4">
-        <div>
-          <label htmlFor="name" className="mb-2 block text-sm font-medium text-slate-700">Full name</label>
-          <input id="name" {...register('name')} className="h-11 w-full rounded-xl border border-slate-300 px-3 outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100" />
-          {errors.name && <p className="mt-1 text-xs text-red-600">{errors.name.message}</p>}
+    <div className="min-h-screen bg-[#F3EFFF] flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden">
+      <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-[#E9DDF2] blur-3xl opacity-60 pointer-events-none" />
+      <div className="absolute -bottom-32 -left-32 w-96 h-96 rounded-full bg-[#D8C2E5] blur-3xl opacity-40 pointer-events-none" />
+
+      <div className="sm:mx-auto sm:w-full sm:max-w-md text-center z-10 px-4">
+        <div className="flex justify-center mb-5">
+          <BrandLogo size="lg" />
         </div>
-        <div>
-          <label htmlFor="signup-email" className="mb-2 block text-sm font-medium text-slate-700">Email address</label>
-          <input id="signup-email" type="email" {...register('email')} className="h-11 w-full rounded-xl border border-slate-300 px-3 outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100" />
-          {errors.email && <p className="mt-1 text-xs text-red-600">{errors.email.message}</p>}
+        <h2 className="text-2xl font-black text-[#34243A] tracking-tight">
+          Create Customer Account
+        </h2>
+        <p className="mt-1 text-sm text-[#81758A]">
+          Join SmartSub to subscribe to premium software & streaming services
+        </p>
+      </div>
+
+      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-lg z-10 px-4">
+        <div className="bg-white py-8 px-6 sm:px-10 rounded-3xl shadow-[0_20px_60px_rgba(103,59,112,0.12)] border border-[#E6DDEC]">
+          {errorMessage && (
+            <div className="mb-6 p-4 rounded-2xl bg-rose-50 border border-rose-200 text-[#D85B69] text-xs font-semibold">
+              {errorMessage}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="block text-xs font-bold uppercase tracking-wider text-[#34243A] mb-1">
+                Full Name *
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#81758A]">
+                  <User className="w-4 h-4" />
+                </div>
+                <input
+                  type="text"
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="e.g. Aditi Rao"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#E6DDEC] bg-white text-sm text-[#34243A] focus:outline-none focus:border-[#673B70] focus:ring-2 focus:ring-[#673B70]/20 transition-all"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#34243A] mb-1">
+                  Email Address *
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#81758A]">
+                    <Mail className="w-4 h-4" />
+                  </div>
+                  <input
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="aditi@example.com"
+                    className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#E6DDEC] bg-white text-sm text-[#34243A] focus:outline-none focus:border-[#673B70] focus:ring-2 focus:ring-[#673B70]/20 transition-all"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#34243A] mb-1">
+                  Phone Number
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#81758A]">
+                    <Phone className="w-4 h-4" />
+                  </div>
+                  <input
+                    type="tel"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder="+91 98765 43210"
+                    className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#E6DDEC] bg-white text-sm text-[#34243A] focus:outline-none focus:border-[#673B70] focus:ring-2 focus:ring-[#673B70]/20 transition-all"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-xs font-bold uppercase tracking-wider text-[#34243A] mb-1">
+                Company Name (Optional)
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#81758A]">
+                  <Building className="w-4 h-4" />
+                </div>
+                <input
+                  type="text"
+                  value={companyName}
+                  onChange={(e) => setCompanyName(e.target.value)}
+                  placeholder="e.g. NextGen Digital Labs"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#E6DDEC] bg-white text-sm text-[#34243A] focus:outline-none focus:border-[#673B70] focus:ring-2 focus:ring-[#673B70]/20 transition-all"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#34243A] mb-1">
+                  Password *
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#81758A]">
+                    <Lock className="w-4 h-4" />
+                  </div>
+                  <input
+                    type="password"
+                    required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Min 6 characters"
+                    className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#E6DDEC] bg-white text-sm text-[#34243A] focus:outline-none focus:border-[#673B70] focus:ring-2 focus:ring-[#673B70]/20 transition-all"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#34243A] mb-1">
+                  Confirm Password *
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#81758A]">
+                    <ShieldCheck className="w-4 h-4" />
+                  </div>
+                  <input
+                    type="password"
+                    required
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    placeholder="Repeat password"
+                    className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#E6DDEC] bg-white text-sm text-[#34243A] focus:outline-none focus:border-[#673B70] focus:ring-2 focus:ring-[#673B70]/20 transition-all"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="pt-2">
+              <label className="flex items-start gap-2.5 cursor-pointer">
+                <input
+                  type="checkbox"
+                  required
+                  checked={termsAccepted}
+                  onChange={(e) => setTermsAccepted(e.target.checked)}
+                  className="mt-0.5 w-4 h-4 rounded text-[#673B70] focus:ring-[#673B70] border-[#D8C2E5]"
+                />
+                <span className="text-xs text-[#81758A] leading-relaxed">
+                  I agree to the <span className="font-semibold text-[#673B70]">Terms of Service</span>, Privacy Policy and recurring subscription billing terms.
+                </span>
+              </label>
+            </div>
+
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full mt-4 py-3 px-4 rounded-xl bg-[#673B70] hover:bg-[#4B2455] text-white font-bold text-sm shadow-[0_6px_20px_rgba(103,59,112,0.35)] transition-all flex items-center justify-center gap-2 hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50"
+            >
+              {isLoading ? (
+                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+              ) : (
+                <>
+                  <span>Create Account & Continue</span>
+                  <ArrowRight className="w-4 h-4" />
+                </>
+              )}
+            </button>
+          </form>
+
+          <div className="mt-6 pt-6 border-t border-[#E6DDEC] text-center">
+            <p className="text-xs text-[#81758A]">
+              Already have an account?{' '}
+              <Link to="/login" className="font-bold text-[#673B70] hover:text-[#4B2455] hover:underline">
+                Sign in here
+              </Link>
+            </p>
+          </div>
         </div>
-        <PasswordInput label="Password" {...register('password')} />
-        {errors.password && <p className="-mt-2 text-xs text-red-600">{errors.password.message}</p>}
-        <ul className="grid grid-cols-2 gap-2 rounded-xl bg-slate-100 p-3 text-xs">
-          {requirements.map(([passed, label]) => (
-            <li key={label} className={`flex items-center gap-2 ${passed ? 'text-emerald-700' : 'text-slate-500'}`}>
-              <span className={`grid h-4 w-4 place-items-center rounded-full border ${passed ? 'border-emerald-600 bg-emerald-600 text-white' : 'border-slate-300'}`}>{passed && <Check size={11} />}</span>
-              {label}
-            </li>
-          ))}
-        </ul>
-        <PasswordInput label="Confirm password" {...register('confirmPassword')} />
-        {errors.confirmPassword && <p className="-mt-2 text-xs text-red-600">{errors.confirmPassword.message}</p>}
-        <button disabled={loading} className="flex h-11 w-full items-center justify-center rounded-xl bg-indigo-600 font-semibold text-white transition hover:bg-indigo-700 disabled:opacity-60">
-          {loading ? <LoaderCircle className="animate-spin" size={20} /> : 'Create account'}
-        </button>
-      </form>
-      <p className="mt-6 text-center text-sm text-slate-600">
-        Already have an account? <Link to="/login" className="font-semibold text-indigo-700">Sign in</Link>
-      </p>
-    </AuthLayout>
-  )
-}
+      </div>
+    </div>
+  );
+};

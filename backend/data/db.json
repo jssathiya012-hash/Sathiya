@@ -1,0 +1,767 @@
+{
+  "users": [
+    {
+      "_id": "id_ej7msbtnl",
+      "createdAt": "2026-10-31T07:10:40.359Z",
+      "updatedAt": "2026-10-31T07:10:40.361Z",
+      "name": "Super Administrator",
+      "email": "admin@brightloop.com",
+      "password": "$2b$10$8YYJI6tlArU0SKatMEqAM..EG2m8AbdVccIWJznQWFiPsvP6xvGvi",
+      "role": "ADMIN",
+      "phone": "+91 98765 00001",
+      "isActive": true
+    },
+    {
+      "_id": "id_uyoa3mkk3",
+      "createdAt": "2026-10-31T07:10:40.440Z",
+      "updatedAt": "2026-10-31T07:10:40.440Z",
+      "name": "Rahul Sharma",
+      "email": "staff@brightloop.com",
+      "password": "$2b$10$F9TRAsxlvxiJeJ30h6vH3u/JoSGyHpbZqOYf4ePEGeI0rzVq6ANYC",
+      "role": "STAFF",
+      "phone": "+91 98765 00002",
+      "isActive": true
+    },
+    {
+      "_id": "id_bc0j7wdf6",
+      "createdAt": "2026-10-31T07:10:40.519Z",
+      "updatedAt": "2026-10-31T07:10:40.519Z",
+      "name": "Aditi Rao",
+      "email": "demo@brightloop.com",
+      "password": "$2b$10$lPqtJRCUn3Zw7qqpjoUTuukBN1wAvSpHXb.m/wDQ/.kTvjmKGXNIC",
+      "role": "CUSTOMER",
+      "phone": "+91 98765 43210",
+      "isActive": true
+    },
+    {
+      "_id": "id_vvynri8p8",
+      "createdAt": "2026-10-31T07:10:40.599Z",
+      "updatedAt": "2026-10-31T07:10:40.599Z",
+      "name": "Sathiya JS",
+      "email": "sathiya@brightloop.com",
+      "password": "$2b$10$dSzSphHjkUWDjKzcV4dUguJvAqXZtYVOsp1Ir3yJjvMbt.gClBb5q",
+      "role": "CUSTOMER",
+      "phone": "+91 98765 88990",
+      "isActive": true
+    }
+  ],
+  "staff": [],
+  "customers": [
+    {
+      "_id": "id_gr3hb5eyn",
+      "createdAt": "2026-10-31T07:10:40.520Z",
+      "updatedAt": "2026-10-31T07:10:40.521Z",
+      "userId": "id_bc0j7wdf6",
+      "customerId": "CUST-100201",
+      "name": "Aditi Rao",
+      "email": "demo@brightloop.com",
+      "phone": "+91 98765 43210",
+      "companyName": "NextGen Digital Labs",
+      "gstNumber": "29AAACN1234M1Z2",
+      "billingAddress": {
+        "line1": "402 Prestige Cyber Towers",
+        "city": "Bangalore",
+        "state": "Karnataka",
+        "postalCode": "560100",
+        "country": "India"
+      },
+      "status": "Active",
+      "assignedStaffId": "STF-101"
+    },
+    {
+      "_id": "id_6pz6g7pv7",
+      "createdAt": "2026-10-31T07:10:40.600Z",
+      "updatedAt": "2026-10-31T07:10:40.600Z",
+      "userId": "id_vvynri8p8",
+      "customerId": "CUST-100202",
+      "name": "Sathiya JS",
+      "email": "sathiya@brightloop.com",
+      "phone": "+91 98765 88990",
+      "companyName": "CloudStream Innovations",
+      "gstNumber": "29BBBCN5678M1Z3",
+      "billingAddress": {
+        "line1": "12 Anna Salai",
+        "city": "Chennai",
+        "state": "Tamil Nadu",
+        "postalCode": "600002",
+        "country": "India"
+      },
+      "status": "Active",
+      "assignedStaffId": "STF-101"
+    }
+  ],
+  "products": [
+    {
+      "_id": "id_w7wahhezm",
+      "createdAt": "2026-10-31T07:10:40.601Z",
+      "updatedAt": "2026-10-31T07:10:40.601Z",
+      "name": "HarmoniX Audio",
+      "type": "Music Streaming",
+      "category": "Audio Streaming",
+      "description": "High-fidelity lossless music streaming with 100M+ tracks and offline playback.",
+      "icon": "Music",
+      "features": [
+        "Lossless Hi-Res Audio",
+        "Unlimited Skips",
+        "Offline Downloads",
+        "Multi-device sync"
+      ],
+      "isActive": true
+    },
+    {
+      "_id": "id_3mtgsan7g",
+      "createdAt": "2026-10-31T07:10:40.602Z",
+      "updatedAt": "2026-10-31T07:10:40.602Z",
+      "name": "CineStream Pro",
+      "type": "Video Streaming",
+      "category": "Video Streaming",
+      "description": "4K HDR on-demand video streaming platform with multi-screen simultaneous streaming.",
+      "icon": "Film",
+      "features": [
+        "4K Ultra HD + Dolby Atmos",
+        "4 Simultaneous Screens",
+        "Ad-free Experience",
+        "Download to Mobile"
+      ],
+      "isActive": true
+    },
+    {
+      "_id": "id_2qnu05omq",
+      "createdAt": "2026-10-31T07:10:40.603Z",
+      "updatedAt": "2026-10-31T07:10:40.603Z",
+      "name": "SkyVault Cloud",
+      "type": "Cloud Storage",
+      "category": "Storage & Backup",
+      "description": "Secure, encrypted automated cloud backup and collaboration workspace.",
+      "icon": "Cloud",
+      "features": [
+        "Zero-Knowledge Encryption",
+        "File Version History (90 days)",
+        "Instant Share Links",
+        "Team Folders"
+      ],
+      "isActive": true
+    },
+    {
+      "_id": "id_ckbm1dnnx",
+      "createdAt": "2026-10-31T07:10:40.603Z",
+      "updatedAt": "2026-10-31T07:10:40.603Z",
+      "name": "SmartSub Suite",
+      "type": "Premium Software",
+      "category": "SaaS Software",
+      "description": "Unified subscription billing, tax management, invoicing and recurring revenue engine.",
+      "icon": "Cpu",
+      "features": [
+        "Automated Invoicing & GST",
+        "Webhooks & API Access",
+        "Multi-gateway reconciliation",
+        "Audit Logs"
+      ],
+      "isActive": true
+    },
+    {
+      "_id": "id_0zklggb4c",
+      "createdAt": "2026-10-31T07:10:40.604Z",
+      "updatedAt": "2026-10-31T07:10:40.604Z",
+      "name": "BrightLearn Academy",
+      "type": "Online Learning Platform",
+      "category": "EdTech",
+      "description": "Interactive coding, software architecture, and system design masterclasses.",
+      "icon": "GraduationCap",
+      "features": [
+        "Accredited Certifications",
+        "Live Mentor Sessions",
+        "Hands-on Projects",
+        "Job Board Access"
+      ],
+      "isActive": true
+    }
+  ],
+  "plans": [
+    {
+      "_id": "id_yy6189nwo",
+      "createdAt": "2026-10-31T07:10:40.606Z",
+      "updatedAt": "2026-10-31T07:10:40.606Z",
+      "productId": "id_w7wahhezm",
+      "productName": "HarmoniX Audio",
+      "name": "HarmoniX Audio - Starter Monthly",
+      "period": "Monthly",
+      "durationMonths": 1,
+      "price": 199,
+      "features": [
+        "Lossless Hi-Res Audio",
+        "Unlimited Skips"
+      ],
+      "minQuantity": 1,
+      "recommended": false,
+      "isActive": true
+    },
+    {
+      "_id": "id_v09g3mdr8",
+      "createdAt": "2026-10-31T07:10:40.607Z",
+      "updatedAt": "2026-10-31T07:10:40.607Z",
+      "productId": "id_w7wahhezm",
+      "productName": "HarmoniX Audio",
+      "name": "HarmoniX Audio - Pro Quarterly",
+      "period": "Quarterly",
+      "durationMonths": 3,
+      "price": 499,
+      "features": [
+        "Lossless Hi-Res Audio",
+        "Unlimited Skips",
+        "Offline Downloads",
+        "Multi-device sync"
+      ],
+      "minQuantity": 1,
+      "recommended": true,
+      "isActive": true
+    },
+    {
+      "_id": "id_fevnqnht0",
+      "createdAt": "2026-10-31T07:10:40.608Z",
+      "updatedAt": "2026-10-31T07:10:40.608Z",
+      "productId": "id_w7wahhezm",
+      "productName": "HarmoniX Audio",
+      "name": "HarmoniX Audio - Enterprise Yearly",
+      "period": "Yearly",
+      "durationMonths": 12,
+      "price": 1899,
+      "features": [
+        "Lossless Hi-Res Audio",
+        "Unlimited Skips",
+        "Offline Downloads",
+        "Multi-device sync",
+        "24/7 Dedicated Support",
+        "SLA 99.99%"
+      ],
+      "minQuantity": 1,
+      "recommended": false,
+      "isActive": true
+    },
+    {
+      "_id": "id_lcn3rwwbn",
+      "createdAt": "2026-10-31T07:10:40.609Z",
+      "updatedAt": "2026-10-31T07:10:40.609Z",
+      "productId": "id_3mtgsan7g",
+      "productName": "CineStream Pro",
+      "name": "CineStream Pro - Starter Monthly",
+      "period": "Monthly",
+      "durationMonths": 1,
+      "price": 499,
+      "features": [
+        "4K Ultra HD + Dolby Atmos",
+        "4 Simultaneous Screens"
+      ],
+      "minQuantity": 1,
+      "recommended": false,
+      "isActive": true
+    },
+    {
+      "_id": "id_ycvn6x2xn",
+      "createdAt": "2026-10-31T07:10:40.610Z",
+      "updatedAt": "2026-10-31T07:10:40.610Z",
+      "productId": "id_3mtgsan7g",
+      "productName": "CineStream Pro",
+      "name": "CineStream Pro - Pro Quarterly",
+      "period": "Quarterly",
+      "durationMonths": 3,
+      "price": 1299,
+      "features": [
+        "4K Ultra HD + Dolby Atmos",
+        "4 Simultaneous Screens",
+        "Ad-free Experience",
+        "Download to Mobile"
+      ],
+      "minQuantity": 1,
+      "recommended": true,
+      "isActive": true
+    },
+    {
+      "_id": "id_noniwnm0z",
+      "createdAt": "2026-10-31T07:10:40.611Z",
+      "updatedAt": "2026-10-31T07:10:40.611Z",
+      "productId": "id_3mtgsan7g",
+      "productName": "CineStream Pro",
+      "name": "CineStream Pro - Enterprise Yearly",
+      "period": "Yearly",
+      "durationMonths": 12,
+      "price": 4799,
+      "features": [
+        "4K Ultra HD + Dolby Atmos",
+        "4 Simultaneous Screens",
+        "Ad-free Experience",
+        "Download to Mobile",
+        "24/7 Dedicated Support",
+        "SLA 99.99%"
+      ],
+      "minQuantity": 1,
+      "recommended": false,
+      "isActive": true
+    },
+    {
+      "_id": "id_y43r3ab14",
+      "createdAt": "2026-10-31T07:10:40.612Z",
+      "updatedAt": "2026-10-31T07:10:40.612Z",
+      "productId": "id_2qnu05omq",
+      "productName": "SkyVault Cloud",
+      "name": "SkyVault Cloud - Starter Monthly",
+      "period": "Monthly",
+      "durationMonths": 1,
+      "price": 799,
+      "features": [
+        "Zero-Knowledge Encryption",
+        "File Version History (90 days)"
+      ],
+      "minQuantity": 1,
+      "recommended": false,
+      "isActive": true
+    },
+    {
+      "_id": "id_w9c7ifnh4",
+      "createdAt": "2026-10-31T07:10:40.612Z",
+      "updatedAt": "2026-10-31T07:10:40.612Z",
+      "productId": "id_2qnu05omq",
+      "productName": "SkyVault Cloud",
+      "name": "SkyVault Cloud - Pro Quarterly",
+      "period": "Quarterly",
+      "durationMonths": 3,
+      "price": 1999,
+      "features": [
+        "Zero-Knowledge Encryption",
+        "File Version History (90 days)",
+        "Instant Share Links",
+        "Team Folders"
+      ],
+      "minQuantity": 1,
+      "recommended": true,
+      "isActive": true
+    },
+    {
+      "_id": "id_6w9pbzp2s",
+      "createdAt": "2026-10-31T07:10:40.613Z",
+      "updatedAt": "2026-10-31T07:10:40.613Z",
+      "productId": "id_2qnu05omq",
+      "productName": "SkyVault Cloud",
+      "name": "SkyVault Cloud - Enterprise Yearly",
+      "period": "Yearly",
+      "durationMonths": 12,
+      "price": 6999,
+      "features": [
+        "Zero-Knowledge Encryption",
+        "File Version History (90 days)",
+        "Instant Share Links",
+        "Team Folders",
+        "24/7 Dedicated Support",
+        "SLA 99.99%"
+      ],
+      "minQuantity": 1,
+      "recommended": false,
+      "isActive": true
+    },
+    {
+      "_id": "id_fkqrlmccv",
+      "createdAt": "2026-10-31T07:10:40.614Z",
+      "updatedAt": "2026-10-31T07:10:40.614Z",
+      "productId": "id_ckbm1dnnx",
+      "productName": "SmartSub Suite",
+      "name": "SmartSub Suite - Starter Monthly",
+      "period": "Monthly",
+      "durationMonths": 1,
+      "price": 799,
+      "features": [
+        "Automated Invoicing & GST",
+        "Webhooks & API Access"
+      ],
+      "minQuantity": 1,
+      "recommended": false,
+      "isActive": true
+    },
+    {
+      "_id": "id_v2tawk091",
+      "createdAt": "2026-10-31T07:10:40.615Z",
+      "updatedAt": "2026-10-31T07:10:40.615Z",
+      "productId": "id_ckbm1dnnx",
+      "productName": "SmartSub Suite",
+      "name": "SmartSub Suite - Pro Quarterly",
+      "period": "Quarterly",
+      "durationMonths": 3,
+      "price": 1999,
+      "features": [
+        "Automated Invoicing & GST",
+        "Webhooks & API Access",
+        "Multi-gateway reconciliation",
+        "Audit Logs"
+      ],
+      "minQuantity": 1,
+      "recommended": true,
+      "isActive": true
+    },
+    {
+      "_id": "id_9ix01ehrs",
+      "createdAt": "2026-10-31T07:10:40.616Z",
+      "updatedAt": "2026-10-31T07:10:40.616Z",
+      "productId": "id_ckbm1dnnx",
+      "productName": "SmartSub Suite",
+      "name": "SmartSub Suite - Enterprise Yearly",
+      "period": "Yearly",
+      "durationMonths": 12,
+      "price": 6999,
+      "features": [
+        "Automated Invoicing & GST",
+        "Webhooks & API Access",
+        "Multi-gateway reconciliation",
+        "Audit Logs",
+        "24/7 Dedicated Support",
+        "SLA 99.99%"
+      ],
+      "minQuantity": 1,
+      "recommended": false,
+      "isActive": true
+    },
+    {
+      "_id": "id_sm9lfpn7b",
+      "createdAt": "2026-10-31T07:10:40.616Z",
+      "updatedAt": "2026-10-31T07:10:40.616Z",
+      "productId": "id_0zklggb4c",
+      "productName": "BrightLearn Academy",
+      "name": "BrightLearn Academy - Starter Monthly",
+      "period": "Monthly",
+      "durationMonths": 1,
+      "price": 799,
+      "features": [
+        "Accredited Certifications",
+        "Live Mentor Sessions"
+      ],
+      "minQuantity": 1,
+      "recommended": false,
+      "isActive": true
+    },
+    {
+      "_id": "id_tzgkjtdj5",
+      "createdAt": "2026-10-31T07:10:40.617Z",
+      "updatedAt": "2026-10-31T07:10:40.617Z",
+      "productId": "id_0zklggb4c",
+      "productName": "BrightLearn Academy",
+      "name": "BrightLearn Academy - Pro Quarterly",
+      "period": "Quarterly",
+      "durationMonths": 3,
+      "price": 1999,
+      "features": [
+        "Accredited Certifications",
+        "Live Mentor Sessions",
+        "Hands-on Projects",
+        "Job Board Access"
+      ],
+      "minQuantity": 1,
+      "recommended": true,
+      "isActive": true
+    },
+    {
+      "_id": "id_9whrrl3lx",
+      "createdAt": "2026-10-31T07:10:40.618Z",
+      "updatedAt": "2026-10-31T07:10:40.618Z",
+      "productId": "id_0zklggb4c",
+      "productName": "BrightLearn Academy",
+      "name": "BrightLearn Academy - Enterprise Yearly",
+      "period": "Yearly",
+      "durationMonths": 12,
+      "price": 6999,
+      "features": [
+        "Accredited Certifications",
+        "Live Mentor Sessions",
+        "Hands-on Projects",
+        "Job Board Access",
+        "24/7 Dedicated Support",
+        "SLA 99.99%"
+      ],
+      "minQuantity": 1,
+      "recommended": false,
+      "isActive": true
+    }
+  ],
+  "subscriptions": [
+    {
+      "_id": "id_c0tjschrz",
+      "createdAt": "2026-10-31T07:10:40.622Z",
+      "updatedAt": "2026-10-31T07:10:40.622Z",
+      "subscriptionId": "SUB-1001",
+      "customerId": "id_bc0j7wdf6",
+      "customerName": "Aditi Rao",
+      "customerEmail": "demo@brightloop.com",
+      "productId": "prod_1",
+      "productName": "HarmoniX Audio",
+      "planId": "plan_1",
+      "planName": "HarmoniX Audio - Starter Monthly",
+      "period": "Monthly",
+      "durationMonths": 1,
+      "originalAmount": 199,
+      "discountAmount": 20,
+      "taxAmount": 32,
+      "finalAmount": 211,
+      "startDate": "2026-10-26T07:10:40.622Z",
+      "endDate": "2026-11-25T07:10:40.622Z",
+      "nextRenewalDate": "2026-11-25T07:10:40.622Z",
+      "status": "Active",
+      "paymentStatus": "Successful",
+      "autoRenew": true
+    },
+    {
+      "_id": "id_1xadoixyi",
+      "createdAt": "2026-10-31T07:10:40.624Z",
+      "updatedAt": "2026-10-31T07:10:40.624Z",
+      "subscriptionId": "SUB-1002",
+      "customerId": "id_vvynri8p8",
+      "customerName": "Sathiya JS",
+      "customerEmail": "sathiya@brightloop.com",
+      "productId": "prod_4",
+      "productName": "SmartSub Suite",
+      "planId": "plan_4",
+      "planName": "SmartSub Suite - Pro Quarterly",
+      "period": "Quarterly",
+      "durationMonths": 3,
+      "originalAmount": 1999,
+      "discountAmount": 200,
+      "taxAmount": 324,
+      "finalAmount": 2123,
+      "startDate": "2026-10-21T07:10:40.622Z",
+      "endDate": "2027-01-24T07:10:40.622Z",
+      "nextRenewalDate": "2027-01-24T07:10:40.622Z",
+      "status": "Active",
+      "paymentStatus": "Successful",
+      "autoRenew": true
+    },
+    {
+      "_id": "id_354vmun6q",
+      "createdAt": "2026-10-31T07:10:40.625Z",
+      "updatedAt": "2026-10-31T07:10:40.625Z",
+      "subscriptionId": "SUB-1003",
+      "customerId": "id_bc0j7wdf6",
+      "customerName": "Aditi Rao",
+      "customerEmail": "demo@brightloop.com",
+      "productId": "prod_2",
+      "productName": "CineStream Pro",
+      "planId": "plan_2",
+      "planName": "CineStream Pro - Starter Monthly",
+      "period": "Monthly",
+      "durationMonths": 1,
+      "originalAmount": 499,
+      "discountAmount": 0,
+      "taxAmount": 90,
+      "finalAmount": 589,
+      "startDate": "2026-09-21T07:10:40.622Z",
+      "endDate": "2026-10-21T07:10:40.622Z",
+      "nextRenewalDate": "2026-10-21T07:10:40.622Z",
+      "status": "Expired",
+      "paymentStatus": "Successful",
+      "autoRenew": false
+    }
+  ],
+  "payments": [
+    {
+      "_id": "id_bhlzuf29t",
+      "createdAt": "2026-10-31T07:10:40.626Z",
+      "updatedAt": "2026-10-31T07:10:40.626Z",
+      "paymentId": "PAY-5001",
+      "subscriptionId": "SUB-1001",
+      "customerId": "id_bc0j7wdf6",
+      "customerName": "Aditi Rao",
+      "customerEmail": "demo@brightloop.com",
+      "amount": 211,
+      "discount": 20,
+      "tax": 32,
+      "method": "Card",
+      "transactionRef": "TXN-98421876",
+      "status": "Successful",
+      "paidAt": "2026-10-26T07:10:40.622Z"
+    },
+    {
+      "_id": "id_qcp7jf3ds",
+      "createdAt": "2026-10-31T07:10:40.628Z",
+      "updatedAt": "2026-10-31T07:10:40.628Z",
+      "paymentId": "PAY-5002",
+      "subscriptionId": "SUB-1002",
+      "customerId": "id_vvynri8p8",
+      "customerName": "Sathiya JS",
+      "customerEmail": "sathiya@brightloop.com",
+      "amount": 2123,
+      "discount": 200,
+      "tax": 324,
+      "method": "UPI",
+      "transactionRef": "TXN-UPI-44910283",
+      "status": "Successful",
+      "paidAt": "2026-10-21T07:10:40.622Z"
+    }
+  ],
+  "discounts": [
+    {
+      "_id": "id_8d46vqtk3",
+      "createdAt": "2026-10-31T07:10:40.619Z",
+      "updatedAt": "2026-10-31T07:10:40.619Z",
+      "code": "FESTIVE50",
+      "name": "Festive Season 50% Off",
+      "type": "PERCENT",
+      "value": 50,
+      "minPurchase": 300,
+      "startDate": "2026-10-24T07:10:40.619Z",
+      "endDate": "2026-12-30T07:10:40.619Z",
+      "usageLimit": 200,
+      "usedCount": 14,
+      "isActive": true
+    },
+    {
+      "_id": "id_lcmaan8er",
+      "createdAt": "2026-10-31T07:10:40.620Z",
+      "updatedAt": "2026-10-31T07:10:40.620Z",
+      "code": "SAVE10",
+      "name": "SmartSub Special 10% Off",
+      "type": "PERCENT",
+      "value": 10,
+      "minPurchase": 100,
+      "startDate": "2026-10-16T07:10:40.620Z",
+      "endDate": "2027-04-29T07:10:40.620Z",
+      "usageLimit": 1000,
+      "usedCount": 42,
+      "isActive": true
+    },
+    {
+      "_id": "id_cfjszkglg",
+      "createdAt": "2026-10-31T07:10:40.621Z",
+      "updatedAt": "2026-10-31T07:10:40.621Z",
+      "code": "WELCOME200",
+      "name": "Flat ₹200 Welcome Offer",
+      "type": "FIXED",
+      "value": 200,
+      "minPurchase": 500,
+      "startDate": "2026-10-01T07:10:40.621Z",
+      "endDate": "2027-01-29T07:10:40.621Z",
+      "usageLimit": 500,
+      "usedCount": 28,
+      "isActive": true
+    }
+  ],
+  "invoices": [
+    {
+      "_id": "id_grgumo6rc",
+      "createdAt": "2026-10-31T07:10:40.629Z",
+      "updatedAt": "2026-10-31T07:10:40.629Z",
+      "invoiceNumber": "INV-2026-0001",
+      "subscriptionId": "SUB-1001",
+      "customerId": "id_bc0j7wdf6",
+      "customerName": "Aditi Rao",
+      "customerEmail": "demo@brightloop.com",
+      "productName": "HarmoniX Audio",
+      "planName": "HarmoniX Audio - Starter Monthly",
+      "subscriptionDuration": "1 Month",
+      "invoiceDate": "2026-10-26T07:10:40.622Z",
+      "dueDate": "2026-10-26T07:10:40.622Z",
+      "originalPrice": 199,
+      "discountAmount": 20,
+      "taxAmount": 32,
+      "finalAmount": 211,
+      "paymentMethod": "Card",
+      "transactionRef": "TXN-98421876",
+      "paymentStatus": "Paid"
+    },
+    {
+      "_id": "id_3ydtotqis",
+      "createdAt": "2026-10-31T07:10:40.630Z",
+      "updatedAt": "2026-10-31T07:10:40.630Z",
+      "invoiceNumber": "INV-2026-0002",
+      "subscriptionId": "SUB-1002",
+      "customerId": "id_vvynri8p8",
+      "customerName": "Sathiya JS",
+      "customerEmail": "sathiya@brightloop.com",
+      "productName": "SmartSub Suite",
+      "planName": "SmartSub Suite - Pro Quarterly",
+      "subscriptionDuration": "3 Months",
+      "invoiceDate": "2026-10-21T07:10:40.622Z",
+      "dueDate": "2026-10-21T07:10:40.622Z",
+      "originalPrice": 1999,
+      "discountAmount": 200,
+      "taxAmount": 324,
+      "finalAmount": 2123,
+      "paymentMethod": "UPI",
+      "transactionRef": "TXN-UPI-44910283",
+      "paymentStatus": "Paid"
+    }
+  ],
+  "notifications": [],
+  "activityLogs": [
+    {
+      "_id": "id_1bpw6tjpl",
+      "createdAt": "2026-10-31T07:11:37.677Z",
+      "updatedAt": "2026-10-31T07:11:37.677Z",
+      "userId": "system",
+      "userName": "SmartSub Engine",
+      "userRole": "SYSTEM",
+      "action": "INITIAL_SETUP",
+      "description": "SmartSub platform initialized with demo subscriptions, products, and accounts.",
+      "timestamp": "2026-10-31T07:11:37.677Z"
+    },
+    {
+      "_id": "id_h6by96k50",
+      "createdAt": "2026-10-31T07:11:53.499Z",
+      "updatedAt": "2026-10-31T07:11:53.499Z",
+      "userId": "id_ej7msbtnl",
+      "userName": "Super Administrator",
+      "userRole": "ADMIN",
+      "action": "LOGIN",
+      "description": "ADMIN Super Administrator logged in successfully",
+      "timestamp": "2026-10-31T07:11:53.498Z"
+    },
+    {
+      "_id": "id_m0k6w99vv",
+      "createdAt": "2026-10-31T07:12:01.580Z",
+      "updatedAt": "2026-10-31T07:12:01.580Z",
+      "userId": "id_ej7msbtnl",
+      "userName": "Super Administrator",
+      "userRole": "ADMIN",
+      "action": "LOGIN",
+      "description": "ADMIN Super Administrator logged in successfully",
+      "timestamp": "2026-10-31T07:12:01.580Z"
+    }
+  ],
+  "companySettings": [
+    {
+      "_id": "id_erhtz7e0k",
+      "createdAt": "2026-10-31T07:11:37.674Z",
+      "updatedAt": "2026-10-31T07:11:37.675Z",
+      "companyName": "Brightloop Software",
+      "brandName": "SmartSub",
+      "tagline": "Unified Subscription Management System",
+      "contactEmail": "support@brightloop.com",
+      "contactPhone": "+91 98765 43210",
+      "address": "Brightloop Tower, Sector 62, Bangalore, India",
+      "gstNumber": "29ABCDE1234F1Z5",
+      "taxRatePercent": 18,
+      "currency": "INR",
+      "currencySymbol": "₹",
+      "testPaymentMode": true
+    }
+  ],
+  "staffs": [
+    {
+      "_id": "id_m0yyjf6bq",
+      "createdAt": "2026-10-31T07:10:40.442Z",
+      "updatedAt": "2026-10-31T07:10:40.442Z",
+      "userId": "id_uyoa3mkk3",
+      "staffId": "STF-101",
+      "name": "Rahul Sharma",
+      "email": "staff@brightloop.com",
+      "phone": "+91 98765 00002",
+      "designation": "Senior Account Manager",
+      "department": "Customer Success",
+      "status": "Active",
+      "permissions": {
+        "canViewCustomers": true,
+        "canEditCustomers": true,
+        "canViewSubscriptions": true,
+        "canRenewSubscriptions": true,
+        "canViewPayments": true,
+        "canViewInvoices": true
+      },
+      "tempPassword": "",
+      "mustChangePassword": false
+    }
+  ]
+}

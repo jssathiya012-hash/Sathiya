@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "server": "node backend/server.js",
+    "seed": "node backend/seed.js",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview"
@@ -12,10 +14,18 @@
   "dependencies": {
     "@hookform/resolvers": "^6.0.2",
     "@tailwindcss/vite": "^4.3.3",
+    "axios": "^1.21.0",
+    "bcryptjs": "^3.0.3",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
     "date-fns": "^4.4.0",
+    "dotenv": "^18.0.9",
+    "express": "^5.3.0",
     "html2canvas": "^1.4.1",
+    "jsonwebtoken": "^9.0.3",
     "jspdf": "^4.2.1",
     "lucide-react": "^1.65.0",
+    "mongoose": "^9.11.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.91.0",
@@ -27,6 +37,11 @@
     "zustand": "^5.0.16"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cookie-parser": "^1.4.10",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^24.19.2",
     "@types/react": "^18.3.28",
     "@types/react-dom": "^18.3.7",

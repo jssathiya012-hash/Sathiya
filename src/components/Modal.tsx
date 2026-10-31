@@ -1,31 +1,54 @@
-import { useEffect, type ReactNode } from 'react'
-import { X } from 'lucide-react'
+import React, { useEffect } from 'react';
+import { X } from 'lucide-react';
 
-interface ModalProps {
-  open: boolean
-  title: string
-  children: ReactNode
-  onClose: () => void
+export interface ModalProps {
+  isOpen?: boolean;
+  open?: boolean;
+  onClose?: () => void;
+  title: string;
+  children: React.ReactNode;
+  maxWidth?: string;
 }
 
-export function Modal({ open, title, children, onClose }: ModalProps) {
-  useEffect(() => {
-    if (!open) return
-    const close = (event: KeyboardEvent) => event.key === 'Escape' && onClose()
-    window.addEventListener('keydown', close)
-    return () => window.removeEventListener('keydown', close)
-  }, [open, onClose])
+export const Modal: React.FC<ModalProps> = ({
+  isOpen,
+  open,
+  onClose,
+  title,
+  children,
+  maxWidth = 'max-w-xl',
+}) => {
+  const visible = isOpen !== undefined ? isOpen : !!open;
 
-  if (!open) return null
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && visible && onClose) onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [visible, onClose]);
+
+  if (!visible) return null;
+
   return (
-    <div className="fixed inset-0 z-50 grid place-items-center bg-slate-950/40 p-4" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-      <div className="max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-2xl bg-white shadow-xl dark:bg-slate-900">
-        <div className="flex items-center justify-between border-b border-slate-200 px-5 py-4 dark:border-slate-800">
-          <h2 id="modal-title" className="font-bold text-slate-950 dark:text-white">{title}</h2>
-          <button aria-label="Close dialog" onClick={onClose} className="grid h-9 w-9 place-items-center rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800"><X size={18} /></button>
+    <div className="fixed inset-0 z-50 overflow-y-auto">
+      <div className="fixed inset-0 bg-[#34243A]/40 backdrop-blur-xs transition-opacity" onClick={onClose} />
+      <div className="flex min-h-full items-center justify-center p-4">
+        <div className={`relative w-full ${maxWidth} rounded-3xl bg-white p-6 shadow-[0_20px_50px_rgba(103,59,112,0.25)] border border-[#E6DDEC] animate-in fade-in zoom-95 duration-200 z-10`}>
+          <div className="flex items-center justify-between pb-4 mb-4 border-b border-[#E6DDEC]">
+            <h3 className="text-lg font-black text-[#34243A] tracking-tight">{title}</h3>
+            {onClose && (
+              <button
+                onClick={onClose}
+                className="p-1.5 rounded-xl text-[#81758A] hover:text-[#34243A] hover:bg-[#F3EFFF] transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            )}
+          </div>
+          {children}
         </div>
-        <div className="p-5">{children}</div>
       </div>
     </div>
-  )
-}
+  );
+};

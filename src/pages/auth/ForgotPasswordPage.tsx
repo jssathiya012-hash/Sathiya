@@ -1,67 +1,133 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { z } from 'zod'
-import toast from 'react-hot-toast'
-import { ArrowLeft, CheckCircle2, LoaderCircle } from 'lucide-react'
-import { AuthLayout } from '../../components/AuthLayout'
-import { requestPasswordReset } from '../../api/mockApi'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Mail, ArrowLeft, Send, CheckCircle2 } from 'lucide-react';
+import { api } from '../../api/client';
+import { BrandLogo } from '../../components/BrandLogo';
 
-const schema = z.object({ email: z.string().email('Enter a valid email address') })
+export const ForgotPasswordPage: React.FC = () => {
+  const [email, setEmail] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [successInfo, setSuccessInfo] = useState<{ message: string; resetUrl?: string } | null>(null);
+  const [error, setError] = useState('');
 
-export function ForgotPasswordPage() {
-  const [email, setEmail] = useState('')
-  const [error, setError] = useState('')
-  const [token, setToken] = useState('')
-  const [loading, setLoading] = useState(false)
-
-  const submit = async (event: React.FormEvent) => {
-    event.preventDefault()
-    const result = schema.safeParse({ email })
-    if (!result.success) {
-      setError(result.error.issues[0]?.message ?? 'Enter a valid email')
-      return
-    }
-    setLoading(true)
-    setError('')
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError('');
     try {
-      const resetToken = await requestPasswordReset(email)
-      setToken(resetToken)
-      toast.success('Reset link created for this demo.')
-    } catch (resetError) {
-      setError(resetError instanceof Error ? resetError.message : 'Could not create a reset link.')
+      const res = await api.post('/auth/forgot-password', { email });
+      setSuccessInfo({
+        message: res.data.message,
+        resetUrl: res.data.resetUrl,
+      });
+    } catch (err: any) {
+      setError(err.response?.data?.message || 'Failed to submit password reset request.');
     } finally {
-      setLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
-    <AuthLayout title={token ? 'Check your email' : 'Forgot password?'} subtitle={token ? 'A reset link has been prepared for this demo.' : 'Enter your email and we will help you reset it.'}>
-      {token ? (
-        <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-5">
-          <div className="flex gap-3">
-            <CheckCircle2 className="shrink-0 text-emerald-600" size={22} />
-            <div>
-              <h2 className="font-semibold text-emerald-950">Reset link sent</h2>
-              <p className="mt-1 text-sm text-emerald-800">This demo will open the reset screen directly.</p>
-              <Link to={`/reset-password/${token}`} className="mt-4 inline-block rounded-lg bg-emerald-700 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-800">
-                Open demo reset link
-              </Link>
-            </div>
-          </div>
+    <div className="min-h-screen bg-[#F3EFFF] flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden">
+      <div className="sm:mx-auto sm:w-full sm:max-w-md text-center z-10 px-4">
+        <div className="flex justify-center mb-5">
+          <BrandLogo size="lg" />
         </div>
-      ) : (
-        <form onSubmit={submit} className="space-y-5">
-          <div>
-            <label htmlFor="forgot-email" className="mb-2 block text-sm font-medium text-slate-700">Email address</label>
-            <input id="forgot-email" type="email" value={email} onChange={event => setEmail(event.target.value)} className="h-11 w-full rounded-xl border border-slate-300 px-3 outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100" placeholder="you@company.com" />
-            {error && <p className="mt-1 text-xs text-red-600">{error}</p>}
-          </div>
-          <button disabled={loading} className="flex h-11 w-full items-center justify-center rounded-xl bg-indigo-600 font-semibold text-white hover:bg-indigo-700 disabled:opacity-60">
-            {loading ? <LoaderCircle className="animate-spin" size={20} /> : 'Send reset link'}
-          </button>
-        </form>
-      )}
-      <Link to="/login" className="mt-7 flex items-center justify-center gap-2 text-sm font-semibold text-slate-600 hover:text-indigo-700"><ArrowLeft size={16} /> Back to sign in</Link>
-    </AuthLayout>
-  )
-}
+        <h2 className="text-2xl font-black text-[#34243A] tracking-tight">
+          Reset Your Password
+        </h2>
+        <p className="mt-1 text-sm text-[#81758A]">
+          Enter your registered email address to receive reset instructions
+        </p>
+      </div>
+
+      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md z-10 px-4">
+        <div className="bg-white py-8 px-6 sm:px-10 rounded-3xl shadow-[0_20px_60px_rgba(103,59,112,0.12)] border border-[#E6DDEC]">
+          {error && (
+            <div className="mb-6 p-4 rounded-2xl bg-rose-50 border border-rose-200 text-[#D85B69] text-xs font-semibold">
+              {error}
+            </div>
+          )}
+
+          {successInfo ? (
+            <div className="text-center py-4">
+              <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-[#2E9467] border border-emerald-200 flex items-center justify-center mx-auto mb-4">
+                <CheckCircle2 className="w-8 h-8" />
+              </div>
+              <h3 className="text-base font-bold text-[#34243A]">Reset Link Dispatched</h3>
+              <p className="text-xs text-[#81758A] mt-2 leading-relaxed">
+                {successInfo.message}
+              </p>
+
+              {successInfo.resetUrl && (
+                <div className="mt-5 p-3 rounded-xl bg-[#F3EFFF] border border-[#D8C2E5] text-left">
+                  <p className="text-[11px] font-bold text-[#4B2455] uppercase">Demo Direct Link:</p>
+                  <Link
+                    to={successInfo.resetUrl}
+                    className="text-xs text-[#673B70] font-semibold underline break-all hover:text-[#4B2455] mt-1 block"
+                  >
+                    Click here to open Reset Password page
+                  </Link>
+                </div>
+              )}
+
+              <div className="mt-6">
+                <Link
+                  to="/login"
+                  className="inline-flex items-center gap-2 text-xs font-bold text-[#673B70] hover:underline"
+                >
+                  <ArrowLeft className="w-3.5 h-3.5" /> Back to Login
+                </Link>
+              </div>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#34243A] mb-1.5">
+                  Email Address
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#81758A]">
+                    <Mail className="w-4 h-4" />
+                  </div>
+                  <input
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="name@company.com"
+                    className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#E6DDEC] bg-white text-sm text-[#34243A] placeholder-[#81758A] focus:outline-none focus:border-[#673B70] focus:ring-2 focus:ring-[#673B70]/20 transition-all"
+                  />
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="w-full py-3 px-4 rounded-xl bg-[#673B70] hover:bg-[#4B2455] text-white font-bold text-sm shadow-[0_6px_20px_rgba(103,59,112,0.35)] transition-all flex items-center justify-center gap-2 hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50"
+              >
+                {isLoading ? (
+                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                ) : (
+                  <>
+                    <Send className="w-4 h-4" />
+                    <span>Send Reset Instructions</span>
+                  </>
+                )}
+              </button>
+
+              <div className="pt-4 border-t border-[#E6DDEC] text-center">
+                <Link
+                  to="/login"
+                  className="inline-flex items-center gap-2 text-xs font-bold text-[#81758A] hover:text-[#673B70]"
+                >
+                  <ArrowLeft className="w-3.5 h-3.5" /> Return to Login
+                </Link>
+              </div>
+            </form>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};

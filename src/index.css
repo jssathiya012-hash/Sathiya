@@ -1,23 +1,85 @@
 @import "tailwindcss";
 
-:root {
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: #111827;
-  background: #f8fafc;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
+@layer base {
+  :root {
+    --bg-main: #F3EFFF;
+    --bg-card: #FFFFFF;
+    --primary-plum: #673B70;
+    --deep-plum: #4B2455;
+    --light-lavender: #E9DDF2;
+    --soft-purple: #D8C2E5;
+    --accent-purple: #A77BB8;
+    --text-main: #34243A;
+    --text-secondary: #81758A;
+    --border-color: #E6DDEC;
+    --success: #2E9467;
+    --warning: #D99A39;
+    --error: #D85B69;
+
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    color: #34243A;
+    background-color: #F3EFFF;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: #F3EFFF;
+    color: #34243A;
+  }
 }
 
-* { box-sizing: border-box; }
-body { margin: 0; min-width: 320px; min-height: 100vh; }
-button, input, select, textarea { font: inherit; }
+/* Custom Design System Utilities */
+.bg-theme-main { background-color: #F3EFFF; }
+.bg-theme-card { background-color: #FFFFFF; }
+.bg-plum { background-color: #673B70; }
+.bg-plum-deep { background-color: #4B2455; }
+.bg-lavender { background-color: #E9DDF2; }
+.bg-lavender-soft { background-color: #D8C2E5; }
+.bg-accent-purple { background-color: #A77BB8; }
 
-.dark { color-scheme: dark; }
+.text-plum { color: #673B70; }
+.text-plum-deep { color: #4B2455; }
+.text-main { color: #34243A; }
+.text-secondary { color: #81758A; }
+
+.border-theme { border-color: #E6DDEC; }
+
+.shadow-soft {
+  box-shadow: 0 4px 20px -2px rgba(103, 59, 112, 0.08), 0 2px 6px -1px rgba(103, 59, 112, 0.04);
+}
+
+.shadow-card {
+  box-shadow: 0 10px 25px -5px rgba(103, 59, 112, 0.08), 0 8px 10px -6px rgba(103, 59, 112, 0.04);
+}
+
+/* Glassmorphic touches */
+.glass-lavender {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(230, 221, 236, 0.8);
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F3EFFF;
+}
+::-webkit-scrollbar-thumb {
+  background: #D8C2E5;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #A77BB8;
+}
 
 @media print {
   body { background: white !important; }
   aside, header, nav, .print\:hidden { display: none !important; }
-  .lg\:pl-64 { padding-left: 0 !important; }
-  main { padding: 0 !important; }
+  .main-content { margin-left: 0 !important; width: 100% !important; }
 }

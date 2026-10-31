@@ -1,25 +1,61 @@
-import type { LucideIcon } from 'lucide-react'
-import { Card } from './Card'
+import React from 'react';
+import type { LucideIcon } from 'lucide-react';
 
-interface StatCardProps {
-  label: string
-  value: string
-  detail?: string
-  icon: LucideIcon
-  iconTone?: string
+export interface StatCardProps {
+  title?: string;
+  label?: string;
+  value: string | number;
+  subtitle?: string;
+  detail?: string;
+  icon: LucideIcon;
+  iconTone?: string;
+  trend?: string;
+  trendUp?: boolean;
+  color?: string;
 }
 
-export function StatCard({ label, value, detail, icon: Icon, iconTone = 'bg-indigo-50 text-indigo-700' }: StatCardProps) {
+export const StatCard: React.FC<StatCardProps> = ({
+  title,
+  label,
+  value,
+  subtitle,
+  detail,
+  icon: Icon,
+  trend,
+  trendUp,
+  color = '#673B70',
+}) => {
+  const displayTitle = title || label || '';
+  const displaySubtitle = subtitle || detail || '';
+
   return (
-    <Card className="p-5">
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <p className="text-sm font-medium text-slate-500">{label}</p>
-          <p className="mt-2 text-2xl font-bold text-slate-950">{value}</p>
-          {detail && <p className="mt-1 text-xs text-slate-500">{detail}</p>}
+    <div className="bg-white rounded-2xl p-5 border border-[#E6DDEC] shadow-[0_4px_20px_rgba(103,59,112,0.06)] hover:shadow-[0_8px_30px_rgba(103,59,112,0.12)] transition-all duration-200 flex flex-col justify-between">
+      <div className="flex items-center justify-between mb-3">
+        <span className="text-xs font-bold text-[#81758A] tracking-wider uppercase">{displayTitle}</span>
+        <div
+          className="w-10 h-10 rounded-xl flex items-center justify-center shadow-xs"
+          style={{ backgroundColor: `${color}15`, color: color }}
+        >
+          <Icon className="w-5 h-5" />
         </div>
-        <span className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl ${iconTone}`}><Icon size={20} /></span>
       </div>
-    </Card>
-  )
-}
+
+      <div className="flex items-baseline justify-between mt-1">
+        <h3 className="text-2xl sm:text-3xl font-black text-[#34243A] tracking-tight">{value}</h3>
+        {trend && (
+          <span
+            className={`text-xs font-bold px-2 py-0.5 rounded-full ${
+              trendUp ? 'bg-emerald-50 text-[#2E9467]' : 'bg-rose-50 text-[#D85B69]'
+            }`}
+          >
+            {trend}
+          </span>
+        )}
+      </div>
+
+      {displaySubtitle && (
+        <p className="text-xs text-[#81758A] mt-2 font-medium">{displaySubtitle}</p>
+      )}
+    </div>
+  );
+};
