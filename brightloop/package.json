@@ -1,0 +1,16 @@
+{
+  "name": "brightloop-subscription-system",
+  "private": true,
+  "workspaces": ["server", "client"],
+  "scripts": {
+    "dev": "concurrently -n server,client -c blue,magenta \"npm run dev -w server\" \"npm run dev -w client\"",
+    "seed": "npm run seed -w server",
+    "seed:large": "npm run seed -w server -- --large",
+    "test": "npm run test -w server",
+    "build": "npm run build -w server && npm run build -w client",
+    "prisma": "npm run prisma -w server"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
