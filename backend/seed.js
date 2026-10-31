@@ -7,11 +7,11 @@ export async function seedData() {
 
   console.log('Seeding initial SmartSub data...');
 
-  // 1. Initial Admin
+  // 1. Initial Admin (Fixed: jssathiya012@gmail.com / Sathiya@012)
   const adminEmail = 'jssathiya012@gmail.com';
   const existingAdmin = await DB.User().findOne({ email: adminEmail });
   if (!existingAdmin) {
-    const adminPass = await bcrypt.hash('Sargiyt6tay', 10);
+    const adminPass = await bcrypt.hash('Sathiya@012', 10);
     await DB.User().create({
       name: 'Sathiya (Admin)',
       email: adminEmail,
@@ -20,30 +20,30 @@ export async function seedData() {
       phone: '+91 98765 00001',
       isActive: true
     });
-    console.log(' Created Super Admin: jssathiya012@gmail.com / Sargiyt6tay');
+    console.log(' Created Super Admin: jssathiya012@gmail.com / Sathiya@012');
   }
 
-  // 2. Staff Accounts (Rahul Sharma: rahul@brightloop.com / Rahul@123, Staff: staff@brightloop.com / Staff@123)
-  const staffEmail = 'rahul@brightloop.com';
+  // 2. Staff Account (Fixed: staff01@brightloop.com / staff@01)
+  const staffEmail = 'staff01@brightloop.com';
   let staffUser = await DB.User().findOne({ email: staffEmail });
   if (!staffUser) {
-    const staffPass = await bcrypt.hash('Rahul@123', 10);
+    const staffPass = await bcrypt.hash('staff@01', 10);
     staffUser = await DB.User().create({
-      name: 'Rahul Sharma',
+      name: 'Brightloop Staff',
       email: staffEmail,
       password: staffPass,
       role: 'STAFF',
-      phone: '+91 98765 00002',
+      phone: '+91 98765 00003',
       isActive: true
     });
 
     await DB.Staff().create({
       userId: staffUser._id || staffUser.id,
-      staffId: 'STF-101',
-      name: 'Rahul Sharma',
+      staffId: 'STF-01',
+      name: 'Brightloop Staff',
       email: staffEmail,
-      phone: '+91 98765 00002',
-      designation: 'Senior Account Manager',
+      phone: '+91 98765 00003',
+      designation: 'Support Specialist',
       department: 'Customer Success',
       status: 'Active',
       permissions: {
@@ -57,7 +57,7 @@ export async function seedData() {
       tempPassword: '',
       mustChangePassword: false
     });
-    console.log(' Created Staff: rahul@brightloop.com / Rahul@123');
+    console.log(' Created Staff: staff01@brightloop.com / staff@01');
   }
 
   const staffEmail2 = 'staff@brightloop.com';
@@ -96,13 +96,13 @@ export async function seedData() {
     console.log(' Created Staff: staff@brightloop.com / Staff@123');
   }
 
-  // 3. Demo Customer 1
-  const custEmail = 'demo@brightloop.com';
+  // 3. Demo Customer 1 (Fixed: ragul012@gmail.com / Ragul@01)
+  const custEmail = 'ragul012@gmail.com';
   let custUser = await DB.User().findOne({ email: custEmail });
   if (!custUser) {
-    const custPass = await bcrypt.hash('Sathiya@012', 10);
+    const custPass = await bcrypt.hash('Ragul@01', 10);
     custUser = await DB.User().create({
-      name: 'Aditi Rao',
+      name: 'Ragul',
       email: custEmail,
       password: custPass,
       role: 'CUSTOMER',
@@ -112,23 +112,23 @@ export async function seedData() {
 
     await DB.Customer().create({
       userId: custUser._id || custUser.id,
-      customerId: 'CUST-100201',
-      name: 'Aditi Rao',
+      customerId: 'CUST-100203',
+      name: 'Ragul',
       email: custEmail,
       phone: '+91 98765 43210',
-      companyName: 'NextGen Digital Labs',
-      gstNumber: '29AAACN1234M1Z2',
+      companyName: 'Ragul Tech Labs',
+      gstNumber: '29AAACN8888M1Z1',
       billingAddress: {
-        line1: '402 Prestige Cyber Towers',
-        city: 'Bangalore',
-        state: 'Karnataka',
-        postalCode: '560100',
+        line1: '500 Tech Park',
+        city: 'Chennai',
+        state: 'Tamil Nadu',
+        postalCode: '600001',
         country: 'India'
       },
       status: 'Active',
-      assignedStaffId: 'STF-101'
+      assignedStaffId: 'STF-01'
     });
-    console.log(' Created Customer 1: demo@brightloop.com / Sathiya@012');
+    console.log(' Created Customer 1: ragul012@gmail.com / Ragul@01');
   }
 
   // Demo Customer 2 (Sathiya)

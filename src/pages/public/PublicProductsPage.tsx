@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Package, Music, Film, Cloud, Cpu, GraduationCap, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import { Package, Music, Film, Cloud, Cpu, GraduationCap, CheckCircle2, LayoutDashboard } from 'lucide-react';
 import { api } from '../../api/client';
 import { BrandLogo } from '../../components/BrandLogo';
+import { useAuthStore } from '../../store/authStore';
 
 export const PublicProductsPage: React.FC = () => {
   const [products, setProducts] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { isAuthenticated, user } = useAuthStore();
+  const location = useLocation();
+  const isInsideDashboard = location.pathname.startsWith('/customer') || location.pathname.startsWith('/admin') || location.pathname.startsWith('/staff');
 
   useEffect(() => {
     api.get('/products')
@@ -26,26 +30,31 @@ export const PublicProductsPage: React.FC = () => {
     }
   };
 
+  const dashboardPath = user?.role === 'ADMIN'
+    ? '/admin/dashboard'
+    : user?.role === 'STAFF'
+    ? '/staff/dashboard'
+    : '/customer/dashboard';
+
   return (
     <div className="min-h-screen bg-[#F3EFFF] text-[#34243A]">
-      {/* Public Header */}
-      <header className="bg-white/80 backdrop-blur-md border-b border-[#E6DDEC] sticky top-0 z-20 px-6 py-4 flex items-center justify-between">
-        <BrandLogo size="md" />
-        <div className="flex items-center gap-3">
-          <Link
-            to="/plans"
-            className="text-xs font-bold text-[#673B70] hover:text-[#4B2455] px-3 py-2 rounded-xl hover:bg-[#F3EFFF] transition-colors"
-          >
-            Subscription Plans
-          </Link>
-          <Link
-            to="/login"
-            className="px-4 py-2 rounded-xl bg-[#673B70] hover:bg-[#4B2455] text-white text-xs font-bold shadow-sm transition-all"
-          >
-            Sign In
-          </Link>
-        </div>
-      </header>
+      {/* Public Header - Only show when NOT embedded inside dashboard */}
+      {!isInsideDashboard && (
+        <header className="bg-white/80 backdrop-blur-md border-b border-[#E6DDEC] sticky top-0 z-20 px-6 py-4 flex items-center justify-between">
+          <BrandLogo size="md" />
+          <div className="flex items-center gap-3">
+            {isAuthenticated ? (
+              <Link
+                to={dashboardPath}
+                className="px-4 py-2 rounded-xl bg-[#673B70] hover:bg-[#4B2455] text-white text-xs font-bold shadow-sm transition-all flex items-center gap-2"
+              >
+                <LayoutDashboard className="w-4 h-4" />
+                <span>My Dashboard</span>
+              </Link>
+            ) : null}
+          </div>
+        </header>
+      )}
 
       {/* Hero Section */}
       <section className="py-12 px-6 text-center max-w-4xl mx-auto">
@@ -53,7 +62,7 @@ export const PublicProductsPage: React.FC = () => {
           Enterprise Subscription Catalogue
         </span>
         <h1 className="text-3xl sm:text-5xl font-black text-[#34243A] tracking-tight mt-4 mb-3">
-          Stream, Store & Scale with <span className="text-[#673B70]">SmartSub</span>
+          Stream, Store & Scale with <span className="text-[#673B70]">Brightloop Software</span>
         </h1>
         <p className="text-[#81758A] text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
           Explore our suite of cloud services, high-fidelity audio, 4K streaming, and business subscription management software.
@@ -99,14 +108,12 @@ export const PublicProductsPage: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-[#E6DDEC]">
-                  <Link
-                    to={`/plans?productId=${prod._id || prod.id}`}
-                    className="w-full py-2.5 px-4 rounded-xl bg-[#673B70] hover:bg-[#4B2455] text-white text-xs font-bold flex items-center justify-center gap-2 shadow-xs transition-colors"
-                  >
-                    <span>View Subscription Plans</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
+                <div className="mt-6 pt-4 border-t border-[#E6DDEC] flex items-center justify-between">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 text-emerald-700 text-xs font-bold border border-emerald-200">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                    Available Product
+                  </span>
+                  <span className="text-[11px] font-semibold text-[#81758A]">Brightloop Software</span>
                 </div>
               </div>
             ))}

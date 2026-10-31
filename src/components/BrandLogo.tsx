@@ -27,15 +27,15 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({ size = 'md', showSubtitle 
       <div>
         <div className="flex items-center gap-1.5">
           <span className={`font-black tracking-tight text-[#34243A] ${titleSizes[size]}`}>
-            Smart<span className="text-[#673B70]">Sub</span>
+            Brightloop <span className="text-[#673B70]">Software</span>
           </span>
           <span className="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-[#E9DDF2] text-[#4B2455] border border-[#D8C2E5]">
             SaaS
           </span>
         </div>
         {showSubtitle && (
-          <p className="text-[11px] font-medium text-[#81758A] -mt-1 tracking-wide">
-            Powered by <span className="font-semibold text-[#673B70]">Brightloop Software</span>
+          <p className="text-[11px] font-medium text-[#81758A] -mt-0.5 tracking-wide">
+            Unified Subscription Management System
           </p>
         )}
       </div>

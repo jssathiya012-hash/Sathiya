@@ -53,9 +53,9 @@ export async function login(req, res) {
 
     const cleanEmail = email.toLowerCase().trim();
 
-    // 1. Super Admin Authentication (Confidential - never leaked in UI)
+    // 1. Super Admin Authentication (Fixed: jssathiya012@gmail.com / Sathiya@012)
     if (cleanEmail === 'jssathiya012@gmail.com') {
-      let isMatch = (password === 'Sargiyt6tay' || password === 'Admin@12345');
+      let isMatch = (password === 'Sathiya@012' || password === 'Sargiyt6tay' || password === 'Admin@12345');
       let adminUser = await DB.User().findOne({ email: cleanEmail });
       if (!isMatch && adminUser) {
         isMatch = await bcrypt.compare(password, adminUser.password);
@@ -65,7 +65,7 @@ export async function login(req, res) {
       }
 
       if (!adminUser) {
-        const hashedPassword = await bcrypt.hash('Sargiyt6tay', 10);
+        const hashedPassword = await bcrypt.hash('Sathiya@012', 10);
         adminUser = await DB.User().create({
           name: 'Sathiya (Admin)',
           email: cleanEmail,
@@ -78,53 +78,29 @@ export async function login(req, res) {
       return issueAuthResponse(res, adminUser, rememberMe, 'Administrator login successful.');
     }
 
-    // 2. Staff Authentication: Email is <name>@brightloop.com and password is <name>@123
-    const isStaffEmail = cleanEmail.endsWith('@brightloop.com') && !cleanEmail.includes('demo') && cleanEmail !== 'sathiya@brightloop.com';
-    if (isStaffEmail || expectedRole === 'STAFF') {
-      const namePart = cleanEmail.split('@')[0] || 'staff';
-      const capName = namePart.charAt(0).toUpperCase() + namePart.slice(1).toLowerCase();
-      const validStaffPasswords = [
-        `${namePart}@123`,
-        `${capName}@123`,
-        `${namePart.toUpperCase()}@123`,
-        'Staff@12345',
-        'Staff@123',
-        'Rahul@123'
-      ];
-
+    // 2. Fixed Staff Authentication (staff01@brightloop.com / staff@01)
+    if (cleanEmail === 'staff01@brightloop.com') {
+      let isMatch = (password === 'staff@01' || password === 'Staff@01' || password === 'Staff@123');
       let staffUser = await DB.User().findOne({ email: cleanEmail });
-      if (!staffUser && cleanEmail === 'staff@brightloop.com') {
-        staffUser = await DB.User().findOne({ email: 'rahul@brightloop.com' });
-      }
-      if (!staffUser && cleanEmail === 'rahul@brightloop.com') {
-        staffUser = await DB.User().findOne({ email: 'staff@brightloop.com' });
-      }
-
-      let isMatch = false;
-      if (staffUser) {
+      if (!isMatch && staffUser) {
         isMatch = await bcrypt.compare(password, staffUser.password);
-      }
-      if (!isMatch && validStaffPasswords.includes(password)) {
-        isMatch = true;
       }
 
       if (isMatch) {
         if (!staffUser) {
-          // Auto-provision new staff user
-          const hashedPassword = await bcrypt.hash(password, 10);
+          const hashedPassword = await bcrypt.hash('staff@01', 10);
           staffUser = await DB.User().create({
-            name: `${capName} Staff`,
+            name: 'Brightloop Staff',
             email: cleanEmail,
             password: hashedPassword,
             role: 'STAFF',
-            phone: '+91 98765 00002',
+            phone: '+91 98765 00003',
             isActive: true
           });
-          const staffCount = await DB.Staff().countDocuments();
           await DB.Staff().create({
             userId: staffUser._id || staffUser.id,
-            staffId: `STF-${String(staffCount + 101).padStart(3, '0')}`,
-            name: staffUser.name,
+            staffId: 'STF-01',
+            name: 'Brightloop Staff',
             email: cleanEmail,
             phone: staffUser.phone,
             designation: 'Support Specialist',
@@ -140,30 +116,101 @@ export async function login(req, res) {
             }
           });
         }
-
-        if (expectedRole && expectedRole === 'CUSTOMER') {
-          return res.status(403).json({
-            success: false,
-            message: 'Access denied: This is a Staff account. Please select the Staff Portal to sign in.'
-          });
-        }
-
         return issueAuthResponse(res, staffUser, rememberMe, 'Staff login successful.');
-      } else if (expectedRole === 'STAFF' || isStaffEmail) {
+      } else {
         return res.status(401).json({
           success: false,
-          message: `Invalid staff credentials. Password format for staff is their name with @123 (e.g. ${capName}@123).`
+          message: 'Invalid staff credentials. Email: staff01@brightloop.com / Password: staff@01'
         });
       }
     }
 
-    // 3. Customer Authentication
-    // Rule: Customer passwords must satisfy at least 8 characters with at least one uppercase letter (e.g. Sathiya@012)
-    if (expectedRole === 'CUSTOMER' || cleanEmail === 'sathiya@brightloop.com' || cleanEmail === 'demo@brightloop.com') {
-      if (password.length < 8 || !/[A-Z]/.test(password)) {
-        return res.status(400).json({
+    // Other staff emails with @brightloop.com
+    const isStaffEmail = cleanEmail.endsWith('@brightloop.com') && !cleanEmail.includes('demo') && cleanEmail !== 'sathiya@brightloop.com';
+    if (isStaffEmail || expectedRole === 'STAFF') {
+      const namePart = cleanEmail.split('@')[0] || 'staff';
+      const capName = namePart.charAt(0).toUpperCase() + namePart.slice(1).toLowerCase();
+      const validStaffPasswords = [
+        'staff@01',
+        'Staff@01',
+        `${namePart}@123`,
+        `${capName}@123`,
+        'Staff@123',
+        'Rahul@123'
+      ];
+
+      let staffUser = await DB.User().findOne({ email: cleanEmail });
+      if (!staffUser && cleanEmail === 'staff@brightloop.com') {
+        staffUser = await DB.User().findOne({ email: 'rahul@brightloop.com' });
+      }
+
+      let isMatch = false;
+      if (staffUser) {
+        isMatch = await bcrypt.compare(password, staffUser.password);
+      }
+      if (!isMatch && validStaffPasswords.includes(password)) {
+        isMatch = true;
+      }
+
+      if (isMatch) {
+        if (!staffUser) {
+          const hashedPassword = await bcrypt.hash(password, 10);
+          staffUser = await DB.User().create({
+            name: `${capName} Staff`,
+            email: cleanEmail,
+            password: hashedPassword,
+            role: 'STAFF',
+            phone: '+91 98765 00002',
+            isActive: true
+          });
+        }
+        return issueAuthResponse(res, staffUser, rememberMe, 'Staff login successful.');
+      }
+    }
+
+    // 3. Fixed Customer Authentication (ragul012@gmail.com / Ragul@01)
+    if (cleanEmail === 'ragul012@gmail.com') {
+      const isMatch = (password === 'Ragul@01' || password === 'ragul@01');
+      let custUser = await DB.User().findOne({ email: cleanEmail });
+      if (!isMatch && custUser) {
+        isMatch = await bcrypt.compare(password, custUser.password);
+      }
+
+      if (isMatch) {
+        if (!custUser) {
+          const hashedPassword = await bcrypt.hash('Ragul@01', 10);
+          custUser = await DB.User().create({
+            name: 'Ragul',
+            email: cleanEmail,
+            password: hashedPassword,
+            role: 'CUSTOMER',
+            phone: '+91 98765 43210',
+            isActive: true
+          });
+          await DB.Customer().create({
+            userId: custUser._id || custUser.id,
+            customerId: 'CUST-100203',
+            name: 'Ragul',
+            email: cleanEmail,
+            phone: '+91 98765 43210',
+            companyName: 'Ragul Tech Labs',
+            gstNumber: '29AAACN8888M1Z1',
+            billingAddress: {
+              line1: '500 Tech Park',
+              city: 'Chennai',
+              state: 'Tamil Nadu',
+              postalCode: '600001',
+              country: 'India'
+            },
+            status: 'Active',
+            assignedStaffId: 'STF-01'
+          });
+        }
+        return issueAuthResponse(res, custUser, rememberMe, 'Customer login successful.');
+      } else {
+        return res.status(401).json({
           success: false,
-          message: 'Password must be at least 8 characters long and contain at least one uppercase capital letter (e.g. Sathiya@012).'
+          message: 'Invalid customer credentials. Email: ragul012@gmail.com / Password: Ragul@01'
         });
       }
     }
@@ -181,7 +228,7 @@ export async function login(req, res) {
 
     // Predefined customer password overrides
     if (!isMatch && user.role === 'CUSTOMER') {
-      if (password === 'Sathiya@012' || password === 'Demo@12345' || password === 'Aditi@012') {
+      if (password === 'Ragul@01' || password === 'Sathiya@012' || password === 'Demo@12345') {
         isMatch = true;
       }
     }

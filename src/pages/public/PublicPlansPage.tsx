@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams, useNavigate, Link } from 'react-router-dom';
-import { Check, Sparkles, Tag, ArrowRight, Layers } from 'lucide-react';
+import { useSearchParams, useNavigate, Link, useLocation } from 'react-router-dom';
+import { Check, Sparkles, Tag, ArrowRight, Layers, LayoutDashboard } from 'lucide-react';
 import { api } from '../../api/client';
 import { useAuthStore } from '../../store/authStore';
 import { BrandLogo } from '../../components/BrandLogo';
@@ -8,7 +8,9 @@ import { BrandLogo } from '../../components/BrandLogo';
 export const PublicPlansPage: React.FC = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const { isAuthenticated, user } = useAuthStore();
+  const isInsideDashboard = location.pathname.startsWith('/customer') || location.pathname.startsWith('/admin') || location.pathname.startsWith('/staff');
 
   const [plans, setPlans] = useState<any[]>([]);
   const [products, setProducts] = useState<any[]>([]);
@@ -45,25 +47,36 @@ export const PublicPlansPage: React.FC = () => {
     }
   };
 
+  const dashboardPath = user?.role === 'ADMIN'
+    ? '/admin/dashboard'
+    : user?.role === 'STAFF'
+    ? '/staff/dashboard'
+    : '/customer/dashboard';
+
   return (
     <div className="min-h-screen bg-[#F3EFFF] text-[#34243A]">
-      <header className="bg-white/80 backdrop-blur-md border-b border-[#E6DDEC] sticky top-0 z-20 px-6 py-4 flex items-center justify-between">
-        <BrandLogo size="md" />
-        <div className="flex items-center gap-3">
-          <Link
-            to="/products"
-            className="text-xs font-bold text-[#673B70] hover:text-[#4B2455] px-3 py-2 rounded-xl hover:bg-[#F3EFFF] transition-colors"
-          >
-            Products
-          </Link>
-          <Link
-            to={isAuthenticated ? (user?.role === 'ADMIN' ? '/admin/dashboard' : user?.role === 'STAFF' ? '/staff/dashboard' : '/customer/dashboard') : '/login'}
-            className="px-4 py-2 rounded-xl bg-[#673B70] hover:bg-[#4B2455] text-white text-xs font-bold shadow-sm transition-all"
-          >
-            {isAuthenticated ? 'My Dashboard' : 'Sign In'}
-          </Link>
-        </div>
-      </header>
+      {!isInsideDashboard && (
+        <header className="bg-white/80 backdrop-blur-md border-b border-[#E6DDEC] sticky top-0 z-20 px-6 py-4 flex items-center justify-between">
+          <BrandLogo size="md" />
+          <div className="flex items-center gap-3">
+            <Link
+              to="/products"
+              className="text-xs font-bold text-[#673B70] hover:text-[#4B2455] px-3 py-2 rounded-xl hover:bg-[#F3EFFF] transition-colors"
+            >
+              Browse Products
+            </Link>
+            {isAuthenticated ? (
+              <Link
+                to={dashboardPath}
+                className="px-4 py-2 rounded-xl bg-[#673B70] hover:bg-[#4B2455] text-white text-xs font-bold shadow-sm transition-all flex items-center gap-2"
+              >
+                <LayoutDashboard className="w-4 h-4" />
+                <span>My Dashboard</span>
+              </Link>
+            ) : null}
+          </div>
+        </header>
+      )}
 
       {/* Promo banner */}
       <div className="bg-gradient-to-r from-[#673B70] to-[#4B2455] text-white py-2.5 px-4 text-center text-xs font-semibold flex items-center justify-center gap-2">

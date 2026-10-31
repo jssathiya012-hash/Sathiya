@@ -63,7 +63,7 @@ export const SignupPage: React.FC = () => {
           Create Customer Account
         </h2>
         <p className="mt-1 text-sm text-[#81758A]">
-          Join SmartSub to subscribe to premium software & streaming services
+          Join Brightloop Software to subscribe to premium software & streaming services
         </p>
       </div>
 

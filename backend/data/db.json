@@ -6,9 +6,31 @@
       "updatedAt": "2026-10-31T07:10:40.361Z",
       "name": "Sathiya (Admin)",
       "email": "jssathiya012@gmail.com",
-      "password": "$2b$10$HN1c9a9O0WKbimRksDOJKOl3YLaQbp4YAYqA//Cnmw7rtB68BDYCy",
+      "password": "$2b$10$zDpC8I8MXz3dLlh3oO3tz.fHU3kBZoHW3W2M.owp.UYbTkTqBUWi2",
       "role": "ADMIN",
       "phone": "+91 98765 00001",
+      "isActive": true
+    },
+    {
+      "_id": "id_staff01_user",
+      "createdAt": "2026-10-31T07:10:40.441Z",
+      "updatedAt": "2026-10-31T07:10:40.441Z",
+      "name": "Brightloop Staff",
+      "email": "staff01@brightloop.com",
+      "password": "$2b$10$de37u/j62jGIZElYlLAwEONiERSBQMwJiWKCwmtZmfS3muRs8kmrG",
+      "role": "STAFF",
+      "phone": "+91 98765 00003",
+      "isActive": true
+    },
+    {
+      "_id": "id_ragul_cust_user",
+      "createdAt": "2026-10-31T07:10:40.520Z",
+      "updatedAt": "2026-10-31T07:10:40.520Z",
+      "name": "Ragul",
+      "email": "ragul012@gmail.com",
+      "password": "$2b$10$48rAv2utk8rczpnXeJKr/umeLqZrXflE7UuQKEoToF0uzk5odZkoe",
+      "role": "CUSTOMER",
+      "phone": "+91 98765 43210",
       "isActive": true
     },
     {
@@ -62,6 +84,39 @@
       "name": "Priya Staff",
       "email": "priya@brightloop.com",
       "password": "$2b$10$CZDuvHc4hKL3FRbf6upNQOJtO/HQC/tSk233yzU.B7uXO/Q7aY1Na",
+      "role": "STAFF",
+      "phone": "+91 98765 00002",
+      "isActive": true
+    },
+    {
+      "_id": "id_q0wilk1rf",
+      "createdAt": "2026-10-31T10:03:31.244Z",
+      "updatedAt": "2026-10-31T10:03:31.244Z",
+      "name": "charu",
+      "email": "yashicharu7@gmail.com",
+      "phone": "7548884909",
+      "password": "$2b$10$UQxtf55jBw2YXxbSEcaf5.wdby3hj9M/Oe9GQ2JCwqGtcmPtzyet2",
+      "role": "CUSTOMER",
+      "isActive": true
+    },
+    {
+      "_id": "id_pw9ff7265",
+      "createdAt": "2026-10-31T10:23:33.574Z",
+      "updatedAt": "2026-10-31T10:23:33.574Z",
+      "name": "Rathishalini ",
+      "email": "rathishalini2008@gmail.com",
+      "phone": "7305914060",
+      "password": "$2b$10$q/l8aIuz0jdq5C72QMDBXurtqwVnoJ8dDAcW8.9aGAEChEiqF/Vwe",
+      "role": "CUSTOMER",
+      "isActive": true
+    },
+    {
+      "_id": "id_jk7bfaywu",
+      "createdAt": "2026-10-31T10:25:41.418Z",
+      "updatedAt": "2026-10-31T10:25:41.418Z",
+      "name": "Rathi Staff",
+      "email": "rathi@brightloop.com",
+      "password": "$2b$10$YsejvRH5J78GXK0jpI8wH.nbYCOMVLFNpZTS7o8lOGlmyPV.ms52S",
       "role": "STAFF",
       "phone": "+91 98765 00002",
       "isActive": true
@@ -157,6 +212,32 @@
       },
       "status": "Active",
       "assignedStaffId": "STF-101"
+    },
+    {
+      "_id": "id_2i55pziyg",
+      "createdAt": "2026-10-31T10:03:31.245Z",
+      "updatedAt": "2026-10-31T10:03:31.245Z",
+      "userId": "id_q0wilk1rf",
+      "customerId": "CUST-438832",
+      "name": "charu",
+      "email": "yashicharu7@gmail.com",
+      "phone": "7548884909",
+      "companyName": "",
+      "status": "Active",
+      "assignedStaffId": ""
+    },
+    {
+      "_id": "id_jemgqpunu",
+      "createdAt": "2026-10-31T10:23:33.575Z",
+      "updatedAt": "2026-10-31T10:23:33.576Z",
+      "userId": "id_pw9ff7265",
+      "customerId": "CUST-571362",
+      "name": "Rathishalini ",
+      "email": "rathishalini2008@gmail.com",
+      "phone": "7305914060",
+      "companyName": "",
+      "status": "Active",
+      "assignedStaffId": ""
     }
   ],
   "products": [
@@ -877,6 +958,28 @@
       "description": "Aditi Rao purchased HarmoniX Audio (HarmoniX Audio - Starter Monthly) for ₹117.",
       "type": "new_subscription",
       "read": false
+    },
+    {
+      "_id": "id_zjisf96ii",
+      "createdAt": "2026-10-31T10:03:31.247Z",
+      "updatedAt": "2026-10-31T10:03:31.247Z",
+      "userId": "admin",
+      "role": "ADMIN",
+      "title": "New Customer Registered",
+      "description": "charu (yashicharu7@gmail.com) created a new customer account.",
+      "type": "customer_registered",
+      "read": false
+    },
+    {
+      "_id": "id_cmjfa3s55",
+      "createdAt": "2026-10-31T10:23:33.577Z",
+      "updatedAt": "2026-10-31T10:23:33.577Z",
+      "userId": "admin",
+      "role": "ADMIN",
+      "title": "New Customer Registered",
+      "description": "Rathishalini  (rathishalini2008@gmail.com) created a new customer account.",
+      "type": "customer_registered",
+      "read": false
     }
   ],
   "activityLogs": [
@@ -1407,6 +1510,182 @@
       "action": "LOGIN",
       "description": "CUSTOMER Sathiya JS logged in successfully",
       "timestamp": "2026-10-31T09:57:43.335Z"
+    },
+    {
+      "_id": "id_g7wri4t93",
+      "createdAt": "2026-10-31T09:58:41.283Z",
+      "updatedAt": "2026-10-31T09:58:41.283Z",
+      "userId": "id_ej7msbtnl",
+      "userName": "Sathiya (Admin)",
+      "userRole": "ADMIN",
+      "action": "LOGIN",
+      "description": "ADMIN Sathiya (Admin) logged in successfully",
+      "timestamp": "2026-10-31T09:58:41.282Z"
+    },
+    {
+      "_id": "id_zwsfe5pqx",
+      "createdAt": "2026-10-31T09:58:41.582Z",
+      "updatedAt": "2026-10-31T09:58:41.582Z",
+      "userId": "id_uyoa3mkk3",
+      "userName": "Rahul Sharma",
+      "userRole": "STAFF",
+      "action": "LOGIN",
+      "description": "STAFF Rahul Sharma logged in successfully",
+      "timestamp": "2026-10-31T09:58:41.582Z"
+    },
+    {
+      "_id": "id_ry3cajhfb",
+      "createdAt": "2026-10-31T09:58:42.073Z",
+      "updatedAt": "2026-10-31T09:58:42.073Z",
+      "userId": "id_vvynri8p8",
+      "userName": "Sathiya JS",
+      "userRole": "CUSTOMER",
+      "action": "LOGIN",
+      "description": "CUSTOMER Sathiya JS logged in successfully",
+      "timestamp": "2026-10-31T09:58:42.073Z"
+    },
+    {
+      "_id": "id_jdt0ojci8",
+      "createdAt": "2026-10-31T10:04:00.706Z",
+      "updatedAt": "2026-10-31T10:04:00.706Z",
+      "userId": "id_q0wilk1rf",
+      "userName": "charu",
+      "userRole": "CUSTOMER",
+      "action": "LOGIN",
+      "description": "CUSTOMER charu logged in successfully",
+      "timestamp": "2026-10-31T10:04:00.706Z"
+    },
+    {
+      "_id": "id_a51ln6h9b",
+      "createdAt": "2026-10-31T10:08:23.566Z",
+      "updatedAt": "2026-10-31T10:08:23.566Z",
+      "userId": "id_q0wilk1rf",
+      "userName": "charu",
+      "userRole": "CUSTOMER",
+      "action": "LOGIN",
+      "description": "CUSTOMER charu logged in successfully",
+      "timestamp": "2026-10-31T10:08:23.566Z"
+    },
+    {
+      "_id": "id_hah3mvuoc",
+      "createdAt": "2026-10-31T10:09:22.011Z",
+      "updatedAt": "2026-10-31T10:09:22.011Z",
+      "userId": "id_q0wilk1rf",
+      "userName": "charu",
+      "userRole": "CUSTOMER",
+      "action": "LOGIN",
+      "description": "CUSTOMER charu logged in successfully",
+      "timestamp": "2026-10-31T10:09:22.011Z"
+    },
+    {
+      "_id": "id_dq1vdfqa8",
+      "createdAt": "2026-10-31T10:26:28.660Z",
+      "updatedAt": "2026-10-31T10:26:28.660Z",
+      "userId": "id_jk7bfaywu",
+      "userName": "Rathi Staff",
+      "userRole": "STAFF",
+      "action": "LOGIN",
+      "description": "STAFF Rathi Staff logged in successfully",
+      "timestamp": "2026-10-31T10:26:28.660Z"
+    },
+    {
+      "_id": "id_rebt7cyw2",
+      "createdAt": "2026-10-31T10:28:32.539Z",
+      "updatedAt": "2026-10-31T10:28:32.539Z",
+      "userId": "id_jk7bfaywu",
+      "userName": "Rathi Staff",
+      "userRole": "STAFF",
+      "action": "LOGIN",
+      "description": "STAFF Rathi Staff logged in successfully",
+      "timestamp": "2026-10-31T10:28:32.539Z"
+    },
+    {
+      "_id": "id_vti9rmxhs",
+      "createdAt": "2026-10-31T10:32:09.440Z",
+      "updatedAt": "2026-10-31T10:32:09.440Z",
+      "userId": "system",
+      "userName": "SmartSub Engine",
+      "userRole": "SYSTEM",
+      "action": "INITIAL_SETUP",
+      "description": "SmartSub platform initialized with demo subscriptions, products, and accounts.",
+      "timestamp": "2026-10-31T10:32:09.438Z"
+    },
+    {
+      "_id": "id_ks35ubggj",
+      "createdAt": "2026-10-31T10:32:16.948Z",
+      "updatedAt": "2026-10-31T10:32:16.948Z",
+      "userId": "id_ej7msbtnl",
+      "userName": "Sathiya (Admin)",
+      "userRole": "ADMIN",
+      "action": "LOGIN",
+      "description": "ADMIN Sathiya (Admin) logged in successfully",
+      "timestamp": "2026-10-31T10:32:16.948Z"
+    },
+    {
+      "_id": "id_455ahws5n",
+      "createdAt": "2026-10-31T10:32:16.963Z",
+      "updatedAt": "2026-10-31T10:32:16.963Z",
+      "userId": "id_staff01_user",
+      "userName": "Brightloop Staff",
+      "userRole": "STAFF",
+      "action": "LOGIN",
+      "description": "STAFF Brightloop Staff logged in successfully",
+      "timestamp": "2026-10-31T10:32:16.963Z"
+    },
+    {
+      "_id": "id_kshkb4g1t",
+      "createdAt": "2026-10-31T10:32:16.970Z",
+      "updatedAt": "2026-10-31T10:32:16.970Z",
+      "userId": "id_ragul_cust_user",
+      "userName": "Ragul",
+      "userRole": "CUSTOMER",
+      "action": "LOGIN",
+      "description": "CUSTOMER Ragul logged in successfully",
+      "timestamp": "2026-10-31T10:32:16.970Z"
+    },
+    {
+      "_id": "id_bx05ghkt0",
+      "createdAt": "2026-10-31T10:32:23.700Z",
+      "updatedAt": "2026-10-31T10:32:23.700Z",
+      "userId": "id_ej7msbtnl",
+      "userName": "Sathiya (Admin)",
+      "userRole": "ADMIN",
+      "action": "LOGIN",
+      "description": "ADMIN Sathiya (Admin) logged in successfully",
+      "timestamp": "2026-10-31T10:32:23.700Z"
+    },
+    {
+      "_id": "id_wl7zk2edm",
+      "createdAt": "2026-10-31T10:32:28.880Z",
+      "updatedAt": "2026-10-31T10:32:28.880Z",
+      "userId": "id_ej7msbtnl",
+      "userName": "Sathiya (Admin)",
+      "userRole": "ADMIN",
+      "action": "LOGIN",
+      "description": "ADMIN Sathiya (Admin) logged in successfully",
+      "timestamp": "2026-10-31T10:32:28.880Z"
+    },
+    {
+      "_id": "id_yglnodssz",
+      "createdAt": "2026-10-31T10:32:29.091Z",
+      "updatedAt": "2026-10-31T10:32:29.091Z",
+      "userId": "id_staff01_user",
+      "userName": "Brightloop Staff",
+      "userRole": "STAFF",
+      "action": "LOGIN",
+      "description": "STAFF Brightloop Staff logged in successfully",
+      "timestamp": "2026-10-31T10:32:29.091Z"
+    },
+    {
+      "_id": "id_hfd1bcp04",
+      "createdAt": "2026-10-31T10:32:29.271Z",
+      "updatedAt": "2026-10-31T10:32:29.271Z",
+      "userId": "id_ragul_cust_user",
+      "userName": "Ragul",
+      "userRole": "CUSTOMER",
+      "action": "LOGIN",
+      "description": "CUSTOMER Ragul logged in successfully",
+      "timestamp": "2026-10-31T10:32:29.271Z"
     }
   ],
   "companySettings": [
@@ -1459,6 +1738,27 @@
       "staffId": "STF-102",
       "name": "Priya Staff",
       "email": "priya@brightloop.com",
+      "phone": "+91 98765 00002",
+      "designation": "Support Specialist",
+      "department": "Customer Success",
+      "status": "Active",
+      "permissions": {
+        "canViewCustomers": true,
+        "canEditCustomers": true,
+        "canViewSubscriptions": true,
+        "canRenewSubscriptions": true,
+        "canViewPayments": true,
+        "canViewInvoices": true
+      }
+    },
+    {
+      "_id": "id_xlhzenbcm",
+      "createdAt": "2026-10-31T10:25:41.420Z",
+      "updatedAt": "2026-10-31T10:25:41.420Z",
+      "userId": "id_jk7bfaywu",
+      "staffId": "STF-103",
+      "name": "Rathi Staff",
+      "email": "rathi@brightloop.com",
       "phone": "+91 98765 00002",
       "designation": "Support Specialist",
       "department": "Customer Success",

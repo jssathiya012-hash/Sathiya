@@ -45,18 +45,7 @@ export const LoginPage: React.FC = () => {
       return;
     }
 
-    // Validate based on selected role
-    if (selectedRole === 'CUSTOMER') {
-      if (password.length < 8 || !/[A-Z]/.test(password)) {
-        setErrorMessage('Customer password must be at least 8 characters long and contain at least one uppercase capital letter (e.g. Sathiya@012).');
-        return;
-      }
-    } else if (selectedRole === 'STAFF') {
-      if (!password.trim()) {
-        setErrorMessage('Please enter your staff password (format: <name>@123, e.g. Rahul@123).');
-        return;
-      }
-    } else if (!password.trim()) {
+    if (!password.trim()) {
       setErrorMessage('Please enter your password.');
       return;
     }
@@ -81,7 +70,7 @@ export const LoginPage: React.FC = () => {
           <BrandLogo size="lg" />
         </div>
         <h2 className="text-2xl font-black text-[#34243A] tracking-tight">
-          Welcome to SmartSub
+          Welcome to Brightloop Software
         </h2>
         <p className="mt-1 text-sm text-[#81758A]">
           Unified Subscription Management System
@@ -199,8 +188,8 @@ export const LoginPage: React.FC = () => {
                     selectedRole === 'ADMIN'
                       ? 'Enter admin email'
                       : selectedRole === 'STAFF'
-                      ? 'rahul@brightloop.com'
-                      : 'sathiya@brightloop.com'
+                      ? 'staff01@brightloop.com'
+                      : 'ragul012@gmail.com'
                   }
                   className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#E6DDEC] bg-white text-sm text-[#34243A] placeholder-[#81758A]/60 focus:outline-none focus:border-[#673B70] focus:ring-2 focus:ring-[#673B70]/20 transition-all font-medium"
                 />
@@ -235,8 +224,8 @@ export const LoginPage: React.FC = () => {
                     selectedRole === 'ADMIN'
                       ? 'Enter admin password'
                       : selectedRole === 'STAFF'
-                      ? 'Rahul@123'
-                      : 'Sathiya@012'
+                      ? 'staff@01'
+                      : 'Ragul@01'
                   }
                   className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-[#E6DDEC] bg-white text-sm text-[#34243A] placeholder-[#81758A]/60 focus:outline-none focus:border-[#673B70] focus:ring-2 focus:ring-[#673B70]/20 transition-all font-medium"
                 />
@@ -252,9 +241,9 @@ export const LoginPage: React.FC = () => {
                 <Info className="w-3 h-3 text-[#673B70] shrink-0" />
                 <span>
                   {selectedRole === 'STAFF'
-                    ? 'Staff format: Email is <name>@brightloop.com and password is <name>@123 (e.g. Rahul@123).'
+                    ? 'Staff credentials: Fixed email staff01@brightloop.com and password staff@01.'
                     : selectedRole === 'CUSTOMER'
-                    ? 'Customer rule: Minimum 8 characters with at least one capital letter (A-Z) like Sathiya@012.'
+                    ? 'Customer credentials: Fixed email ragul012@gmail.com and password Ragul@01.'
                     : 'Confidential administrative portal. Protected credentials required.'}
                 </span>
               </p>
@@ -294,20 +283,20 @@ export const LoginPage: React.FC = () => {
           {selectedRole !== 'ADMIN' && (
             <div className="mt-5 p-3 rounded-2xl bg-[#F3EFFF] border border-[#E6DDEC] text-[11px] text-[#81758A]">
               <span className="font-bold text-[#34243A]">
-                {selectedRole === 'STAFF' ? 'Staff Login Format:' : 'Sample Customer Login:'}
+                {selectedRole === 'STAFF' ? 'Staff Portal Credentials:' : 'Customer Portal Credentials:'}
               </span>
               <p className="mt-0.5">
                 {selectedRole === 'STAFF' ? (
                   <>
-                    Email: <span className="font-mono text-[#673B70] font-semibold">rahul@brightloop.com</span>
-                    {' '}| Password: <span className="font-mono text-[#673B70] font-semibold">Rahul@123</span>
-                    <span className="block text-[10px] text-[#81758A] mt-0.5">(Your name with @brightloop.com &amp; same name with @123)</span>
+                    Email: <span className="font-mono text-[#673B70] font-semibold">staff01@brightloop.com</span>
+                    {' '}| Password: <span className="font-mono text-[#673B70] font-semibold">staff@01</span>
+                    <span className="block text-[10px] text-[#81758A] mt-0.5">(Fixed credentials for staff login)</span>
                   </>
                 ) : (
                   <>
-                    Email: <span className="font-mono text-[#673B70] font-semibold">sathiya@brightloop.com</span>
-                    {' '}| Password: <span className="font-mono text-[#673B70] font-semibold">Sathiya@012</span>
-                    <span className="block text-[10px] text-[#81758A] mt-0.5">(Must contain 8+ characters and at least one capital letter)</span>
+                    Email: <span className="font-mono text-[#673B70] font-semibold">ragul012@gmail.com</span>
+                    {' '}| Password: <span className="font-mono text-[#673B70] font-semibold">Ragul@01</span>
+                    <span className="block text-[10px] text-[#81758A] mt-0.5">(Fixed credentials for customer login)</span>
                   </>
                 )}
               </p>
@@ -321,10 +310,8 @@ export const LoginPage: React.FC = () => {
                 Create an account
               </Link>
             </p>
-            <div className="mt-3 flex justify-center gap-4 text-xs font-semibold text-[#81758A]">
+            <div className="mt-3 flex justify-center text-xs font-semibold text-[#81758A]">
               <Link to="/products" className="hover:text-[#673B70]">Browse Products</Link>
-              <span>•</span>
-              <Link to="/plans" className="hover:text-[#673B70]">Subscription Plans</Link>
             </div>
           </div>
         </div>

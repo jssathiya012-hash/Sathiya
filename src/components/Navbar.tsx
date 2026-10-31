@@ -64,8 +64,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar, title }) => {
           <Menu className="w-5 h-5" />
         </button>
         <div>
-          <h1 className="text-xl font-black text-[#34243A] tracking-tight">{title || 'SmartSub'}</h1>
-          <p className="text-xs text-[#81758A] hidden sm:block">Unified Subscription Management</p>
+          <h1 className="text-xl font-black text-[#34243A] tracking-tight">{title || 'Brightloop Software'}</h1>
+          <p className="text-xs text-[#81758A] hidden sm:block">Unified Subscription Management System</p>
         </div>
       </div>
 
